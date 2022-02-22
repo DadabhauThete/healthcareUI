@@ -1,0 +1,173 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="'Add Benefit Plan'"
+        [items]="[]"
+        [active_item]="'Dashboad'"
+      ></app-breadcrumb>
+    </div>
+    <!-- Widgets -->
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Reactive Forms (Outline)</h2>
+          </div>
+          <div class="body">
+            <form
+              class="register-form m-4"
+              [formGroup]="addbenefitplan"
+              (ngSubmit)="onRegister()"
+            >
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Company name </mat-label>
+                    <input matInput formControlName="companyName" required />
+                    <mat-icon matSuffix>face </mat-icon>
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('companyName').hasError('required')
+                      "
+                    >
+                      Company name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Plan name </mat-label>
+                    <input matInput formControlName="planName" />
+                    <mat-icon matSuffix>face </mat-icon>
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('planName').hasError('required')
+                      "
+                    >
+                      Plan name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Plan Duration Number</mat-label>
+                    <input matInput formControlName="planDuration" />
+                    <mat-icon matSuffix>face </mat-icon>
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('planDuration').hasError('required')
+                      "
+                    >
+                      Plan Duration is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Start Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="startdate"
+                      formControlName="startdate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="startdate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #startdate></mat-datepicker>
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('startdate').hasError('required')
+                      "
+                    >
+                      Start Date is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>End Date</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="enddate"
+                      formControlName="enddate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="enddate"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #enddate></mat-datepicker>
+                    <mat-error
+                      *ngIf="addbenefitplan.get('enddate').hasError('required')"
+                    >
+                      End Date is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <label class="example-margin">Is Active</label>
+                  <mat-radio-group [(ngModel)]="labelPosition">
+                    <mat-radio-button class="example-margin" value="yes" checked
+                      >Yes</mat-radio-button
+                    >
+                    <mat-radio-button class="example-margin" value="no"
+                      >No
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Description</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('description').hasError('required')
+                      "
+                    >
+                      Description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <button
+                    type="submit"
+                    class="btn-space"
+                    [disabled]="addbenefitplan.invalid"
+                    mat-raised-button
+                    color="primary"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
