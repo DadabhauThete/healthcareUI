@@ -45,10 +45,6 @@ const routes: Routes = [
     component: MembersummaryComponent,
   },
   {
-    path: "membersummary/:id",
-    component: MembersummaryComponent,
-  },
-  {
     path: "doctor-dashboard",
     component: doctorDashboard,
   },

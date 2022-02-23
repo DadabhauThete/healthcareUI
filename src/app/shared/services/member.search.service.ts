@@ -3,6 +3,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from "@angular/common/http";
 import { retry, catchError, map } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
@@ -24,6 +25,15 @@ export class MemberSearch {
       `${environment.baseUrl}Patient/PatientSearch`,
       memberData,
       httpOptions
+    );
+  }
+
+  getMembersListById(id:number) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("patientID",id);
+    return this.http.get(
+      `${environment.baseUrl}Patient/GetPatientSummary`,{params:queryParams}
+
     );
   }
 

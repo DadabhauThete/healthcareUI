@@ -23,6 +23,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSelectModule } from "@angular/material/select";
+
+import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatRadioModule,
     MatStepperModule,
     MatSnackBarModule,
+    MatSelectModule,
+
+    NgxDatatableModule,
   ],
 })
 export class DashboardModule {}

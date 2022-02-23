@@ -3,7 +3,7 @@
     <div class="block-header">
       <!-- breadcrumb -->
       <app-breadcrumb
-        [title]="'Add Benefit Plan'"
+        [title]="'Benefit Plan'"
         [items]="[]"
         [active_item]="'Dashboad'"
       ></app-breadcrumb>
@@ -13,7 +13,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>Reactive Forms (Outline)</h2>
+            <h2>Add Benefit Plan</h2>
           </div>
           <div class="body">
             <form
@@ -35,7 +35,7 @@
                         addbenefitplan.get('companyName').hasError('required')
                       "
                     >
-                      Company name is required
+                      Company Name is required
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -52,7 +52,7 @@
                         addbenefitplan.get('planName').hasError('required')
                       "
                     >
-                      Plan name is required
+                      Company Name is required
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -61,16 +61,22 @@
                     class="example-full-width"
                     appearance="outline"
                   >
-                    <mat-label>Plan Duration Number</mat-label>
-                    <input matInput formControlName="planDuration" />
+                    <mat-label>Insurance Type </mat-label>
+                    <mat-select formControlName="insuranceType">
+                      <mat-option
+                        *ngFor="let insurance of insurance"
+                        value="{{ insurance }}"
+                        >{{ insurance }}</mat-option
+                      >
+                    </mat-select>
                     <mat-icon matSuffix>face </mat-icon>
-                    <mat-error
+                    <!-- <mat-error
                       *ngIf="
-                        addbenefitplan.get('planDuration').hasError('required')
+                        addbenefitplan.get('planName').hasError('required')
                       "
                     >
-                      Plan Duration is required
-                    </mat-error>
+                      Plan name is required
+                    </mat-error> -->
                   </mat-form-field>
                 </div>
               </div>
@@ -80,24 +86,47 @@
                     class="example-full-width"
                     appearance="outline"
                   >
+                    <mat-label>Plan Duration Number</mat-label>
+                    <mat-select formControlName="planDuration">
+                      <mat-option
+                        [value]="i"
+                        *ngFor="let i of plandurationnumber"
+                        >{{ i }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-icon matSuffix>face </mat-icon>
+                    <!-- <mat-error
+                      *ngIf="
+                        addbenefitplan.get('planDuration').hasError('required')
+                      "
+                    >
+                      Plan Duration is required
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Start Date</mat-label>
                     <input
                       matInput
                       [matDatepicker]="startdate"
-                      formControlName="startdate"
+                      formControlName="planStartDate"
                     />
                     <mat-datepicker-toggle
                       matSuffix
                       [for]="startdate"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #startdate></mat-datepicker>
-                    <mat-error
+                    <!-- <mat-error
                       *ngIf="
                         addbenefitplan.get('startdate').hasError('required')
                       "
                     >
                       Start Date is required
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -109,33 +138,41 @@
                     <input
                       matInput
                       [matDatepicker]="enddate"
-                      formControlName="enddate"
+                      formControlName="planEndDate"
                     />
                     <mat-datepicker-toggle
                       matSuffix
                       [for]="enddate"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #enddate></mat-datepicker>
-                    <mat-error
+                    <!-- <mat-error
                       *ngIf="addbenefitplan.get('enddate').hasError('required')"
                     >
                       End Date is required
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
                   <label class="example-margin">Is Active</label>
-                  <mat-radio-group [(ngModel)]="labelPosition">
-                    <mat-radio-button class="example-margin" value="yes" checked
+                  <mat-radio-group formControlName="isAcive">
+                    <mat-radio-button
+                      class="example-margin"
+                      name="isAcive"
+                      checked
+                      value="true"
+                      [checked]="true"
                       >Yes</mat-radio-button
                     >
-                    <mat-radio-button class="example-margin" value="no"
+                    <mat-radio-button
+                      class="example-margin"
+                      name="isActive"
+                      value="false"
                       >No
                     </mat-radio-button>
                   </mat-radio-group>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
                   <mat-form-field
                     class="example-full-width"
@@ -143,13 +180,13 @@
                   >
                     <mat-label>Description</mat-label>
                     <textarea matInput formControlName="description"></textarea>
-                    <mat-error
+                    <!-- <mat-error
                       *ngIf="
                         addbenefitplan.get('description').hasError('required')
                       "
                     >
                       Description is required
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -160,11 +197,80 @@
                     mat-raised-button
                     color="primary"
                   >
-                    Submit
+                    Add Benefit
                   </button>
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Available Benefit Plans</h2>
+            <button
+              mat-button
+              [matMenuTriggerFor]="menu"
+              class="header-dropdown"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Action</button>
+              <button mat-menu-item>Another action</button>
+              <button mat-menu-item>Something else here</button>
+            </mat-menu>
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <!-- {{ benefit.data | json }} -->
+
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Company Name</th>
+                    <th>Plan Name</th>
+                    <th>Insurance Type</th>
+                    <th>Plan Duration</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Is Active</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let member of benefit.data">
+                    <td class="table-img">
+                      {{ member.companyName }}
+                    </td>
+                    <td>{{ member.planName }}</td>
+                    <td>{{ member.insuranceType }}</td>
+                    <td>{{ member.planDuration }}</td>
+                    <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ member.isAcive }}</td>
+
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons
+                          [icon]="'edit'"
+                          [class]="'tbl-fav-edit'"
+                        ></app-feather-icons>
+                      </button>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons
+                          [icon]="'trash-2'"
+                          [class]="'tbl-fav-delete'"
+                        ></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

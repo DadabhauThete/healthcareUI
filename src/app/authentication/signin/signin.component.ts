@@ -40,14 +40,7 @@ export class SigninComponent
     this.authForm.get("username").setValue("admin@gmail.com");
     this.authForm.get("password").setValue("admin123");
   }
-  doctorSet() {
-    this.authForm.get("username").setValue("doctor@hospital.org");
-    this.authForm.get("password").setValue("doctor@123");
-  }
-  patientSet() {
-    this.authForm.get("username").setValue("patient@hospital.org");
-    this.authForm.get("password").setValue("patient@123");
-  }
+
   onSubmit() {
     this.submitted = true;
     this.loading = true;
@@ -65,12 +58,6 @@ export class SigninComponent
                 const role = this.authService.currentUserValue.role;
                 if (role === Role.All || role === Role.Admin) {
                   this.router.navigate(["/admin/dashboard/searchmember"]);
-                } else if (role === Role.Doctor) {
-                  this.router.navigate(["/doctor/dashboard"]);
-                } else if (role === Role.Patient) {
-                  this.router.navigate(["/patient/dashboard"]);
-                } else {
-                  this.router.navigate(["/authentication/signin"]);
                 }
                 this.loading = false;
               }, 1000);

@@ -30,7 +30,7 @@
                     appearance="outline"
                   >
                     <mat-label>Account No. </mat-label>
-                    <input matInput formControlName="patientId" />
+                    <input matInput formControlName="patientId" min="0" />
                     <mat-icon matSuffix>face </mat-icon>
                   </mat-form-field>
                 </div>
@@ -41,7 +41,7 @@
                     appearance="outline"
                   >
                     <mat-label>First name </mat-label>
-                    <input matInput formControlName="firstName" required />
+                    <input matInput formControlName="firstName" />
                     <mat-icon matSuffix>face </mat-icon>
                     <mat-error
                       *ngIf="search.get('firstName').hasError('required')"
@@ -126,12 +126,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                  <button
-                    class="btn-space"
-                    [disabled]="!search.valid"
-                    mat-raised-button
-                    color="primary"
-                  >
+                  <button class="btn-space" mat-raised-button color="primary">
                     Search
                   </button>
                 </div>
@@ -184,36 +179,46 @@
                     <td class="text-truncate">
                       {{ member.gender }}
                     </td>
-                    <td>{{ member.dateOfBirth | date: "dd-MM-yy" }}</td>
+                    <td>{{ member.dateOfBirth | date: "MM/dd/yyyy" }}</td>
                     <td>
                       {{ member.age }}
                     </td>
                     <td>{{ member.contactNo }}</td>
                     <td>
-                      <button mat-icon-button class="tbl-action-btn">
+                      <!-- <button mat-icon-button class="tbl-action-btn">
                         <a>
                           <app-feather-icons
                             [icon]="'edit'"
                             [class]="'tbl-fav-edit'"
                           ></app-feather-icons
                         ></a>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons
-                          [icon]="'edit'"
-                          [class]="'tbl-fav-edit'"
-                        ></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons
-                          [icon]="'edit'"
-                          [class]="'tbl-fav-edit'"
-                        ></app-feather-icons>
-                      </button>
+                      </button> -->
+                      <mat-icon class="msr-2" matSuffix (click)="onAddClick()"
+                        >note_add</mat-icon
+                      >
+                      <mat-icon
+                        class="msr-2"
+                        matSuffix
+                        (click)="onAssignClick()"
+                        >assignment</mat-icon
+                      >
+
+                      <a
+                        ><mat-icon
+                          class="msr-2"
+                          matSuffix
+                          (click)="onViewClick(member.patientID)"
+                        >
+                          visibility
+                        </mat-icon></a
+                      >
                     </td>
                   </tr>
                   <tr *ngIf="!isMember" style="text-align: center">
                     <td colspan="7">Members Data is not available.</td>
+                  </tr>
+                  <tr *ngIf="error" style="text-align: center">
+                    <td colspan="7">Member is not found</td>
                   </tr>
                 </tbody>
               </table>
