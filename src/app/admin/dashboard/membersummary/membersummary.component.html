@@ -12,7 +12,183 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card card-statistic-2">
-          <p>membersummary works!</p>
+          <div class="body">
+            <p>membersummary works!</p>
+            <div class="tableBody">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Patient Name</th>
+                      <th>Assigned Doctor</th>
+                      <th>Date</th>
+                      <th>Diseases</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user1.jpg" alt="" />
+                      </td>
+                      <td>John Doe</td>
+                      <td>
+                        <a href="mailto:test@gmail.com"> Dr.Jacob Ryan </a>
+                      </td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-red">Fever</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user2.jpg" alt="" />
+                      </td>
+                      <td>Sarah Smith</td>
+                      <td><a href="mailto:test@gmail.com"> Dr.Rajesh </a></td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-green">Cholera</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user3.jpg" alt="" />
+                      </td>
+                      <td>Airi Satou</td>
+                      <td><a href="mailto:test@gmail.com"> Dr.Jay Soni </a></td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-purple">Jaundice</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user4.jpg" alt="" />
+                      </td>
+                      <td>Angelica Ramos</td>
+                      <td><a href="mailto:test@gmail.com"> Dr.John Deo </a></td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-purple">Typhod</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user5.jpg" alt="" />
+                      </td>
+                      <td>Ashton Cox</td>
+                      <td>
+                        <a href="mailto:test@gmail.com"> Dr.Megha Trivedi </a>
+                      </td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-orange">Maleria</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="table-img">
+                        <img src="assets/images/user/user8.jpg" alt="" />
+                      </td>
+                      <td>Cara Stevens</td>
+                      <td>
+                        <a href="mailto:test@gmail.com"> Dr.Sarah Smith </a>
+                      </td>
+                      <td>12/05/2016</td>
+                      <td>
+                        <div class="badge col-cyan">Infection</div>
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

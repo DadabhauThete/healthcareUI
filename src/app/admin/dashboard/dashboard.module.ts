@@ -22,6 +22,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatStepperModule } from "@angular/material/stepper";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MatStepperModule } from "@angular/material/stepper";
     MatCheckboxModule,
     MatRadioModule,
     MatStepperModule,
+    MatSnackBarModule,
   ],
 })
 export class DashboardModule {}

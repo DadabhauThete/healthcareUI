@@ -19,7 +19,7 @@ export class MemberSearch {
   headers = new HttpHeaders().set("Content-Type", "application/json");
   constructor(private http: HttpClient) {}
 
-  getMembersList(memberData: Members): Observable<any> {
+  getMembersList(memberData: Members) {
     return this.http.post(
       `${environment.baseUrl}Patient/PatientSearch`,
       memberData,

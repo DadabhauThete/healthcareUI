@@ -12,18 +12,12 @@
     <div class="row clearfix">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
-          <button
-            mat-raised-button
-            color="accent"
-            (click)="snackPositionTopCenter()"
-          >
-            Show snackbar center bottom
-          </button>
           <div class="body">
             <form
               class="register-form m-4"
               [formGroup]="registerMember"
               (ngSubmit)="onRegister()"
+              novalidate
             >
               <div class="header ps-0 pt-0">
                 <h2>Personal Details</h2>
@@ -34,6 +28,9 @@
                     <mat-form-field
                       class="example-full-width"
                       appearance="outline"
+                      [class]="
+                        removeClass == true ? 'removeBorder' : 'sameBorder'
+                      "
                     >
                       <mat-label>First name </mat-label>
                       <input matInput formControlName="firstName" required />
@@ -82,7 +79,7 @@
                 </div>
                 <div class="row">
                   <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                    <label class="example-margin">Gender</label>
+                    <label class="example-margin m-t-10">Gender</label>
                     <mat-radio-group
                       aria-label="Select an option"
                       formControlName="gender"
@@ -109,6 +106,8 @@
                         matInput
                         [matDatepicker]="picker"
                         formControlName="dateOfBirth"
+                        [max]="maxDate"
+                        (ngModelChange)="updateCalcs()"
                       />
                       <mat-datepicker-toggle
                         matSuffix
@@ -287,323 +286,18 @@
                     >
                       Register
                     </button>
-                    <button type="button" mat-raised-button color="primary">
+                    <button
+                      type="button"
+                      mat-raised-button
+                      color="primary"
+                      (click)="onReset()"
+                    >
                       Reset
                     </button>
                   </div>
                 </div>
               </div>
             </form>
-
-            <!-- <mat-horizontal-stepper [linear]="isLinear" #stepper>
-              <mat-step [stepControl]="HFormGroup1">
-                <form [formGroup]="HFormGroup1">
-                  <ng-template matStepLabel>Fill out your name</ng-template>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>First name </mat-label>
-                        <input matInput formControlName="firstName" required />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup1.get('firstName').hasError('required')
-                          "
-                        >
-                          First name is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Middle name </mat-label>
-                        <input matInput formControlName="middleName" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup1.get('middleName').hasError('required')
-                          "
-                        >
-                          Middle Name is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Last name </mat-label>
-                        <input matInput formControlName="lastname" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup1.get('lastname').hasError('required')
-                          "
-                        >
-                          Last Name is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <label class="example-margin">Gender</label>
-                      <mat-radio-group [(ngModel)]="labelPosition">
-                        <mat-radio-button
-                          class="example-margin"
-                          value="male"
-                          checked
-                          >Male</mat-radio-button
-                        >
-                        <mat-radio-button class="example-margin" value="female"
-                          >Female
-                        </mat-radio-button>
-                      </mat-radio-group>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Date of Birth</mat-label>
-                        <input
-                          matInput
-                          [matDatepicker]="picker"
-                          formControlName="dateOfBirth"
-                        />
-                        <mat-datepicker-toggle
-                          matSuffix
-                          [for]="picker"
-                        ></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup1.get('dateOfBirth').hasError('required')
-                          "
-                        >
-                          Date of birth is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Age</mat-label>
-                        <span matSuffix>
-                          <mat-icon class="msr-2">phone</mat-icon>
-                        </span>
-                        <input matInput formControlName="age" />
-                        <mat-error
-                          *ngIf="HFormGroup1.get('age').hasError('required')"
-                        >
-                          Age is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Email </mat-label>
-                        <input matInput formControlName="email" required />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="HFormGroup1.get('email').hasError('required')"
-                        >
-                          Email is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Contact </mat-label>
-                        <input matInput formControlName="contactNo" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup1.get('contactNo').hasError('required')
-                          "
-                        >
-                          Contact number required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      mat-raised-button
-                      matStepperNext
-                      color="primary"
-                      [disabled]="!HFormGroup1.valid"
-                    >
-                      Next
-                    </button>
-                  </div>
-                </form>
-              </mat-step>
-              <mat-step [stepControl]="HFormGroup2">
-                <form [formGroup]="HFormGroup2">
-                  <ng-template matStepLabel>Fill out your address</ng-template>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Address 1 </mat-label>
-                        <input matInput formControlName="address1" required />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup2.get('address1').hasError('required')
-                          "
-                        >
-                          Address required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Address 2 </mat-label>
-                        <input matInput formControlName="address2" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup2.get('address2').hasError('required')
-                          "
-                        >
-                          Address 2 required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Country </mat-label>
-                        <input matInput formControlName="country" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup2.get('country').hasError('required')
-                          "
-                        >
-                          Country required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>State </mat-label>
-                        <input matInput formControlName="state" required />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="HFormGroup2.get('state').hasError('required')"
-                        >
-                          State required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>City </mat-label>
-                        <input matInput formControlName="city" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="HFormGroup2.get('city').hasError('required')"
-                        >
-                          City is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Zip Code </mat-label>
-                        <input matInput formControlName="zipCode" />
-                        <mat-icon matSuffix>face </mat-icon>
-                        <mat-error
-                          *ngIf="
-                            HFormGroup2.get('zipCode').hasError('required')
-                          "
-                        >
-                          Zipcode is required
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      mat-raised-button
-                      matStepperPrevious
-                      color="warn"
-                      class="msr-2"
-                    >
-                      Back
-                    </button>
-                    <button
-                      mat-raised-button
-                      matStepperNext
-                      color="primary"
-                      [disabled]="!HFormGroup2.valid"
-                    >
-                      Next
-                    </button>
-                  </div>
-                </form>
-              </mat-step>
-              <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p>You are now done.</p>
-                <div>
-                  <button
-                    mat-raised-button
-                    matStepperPrevious
-                    color="warn"
-                    class="msr-2"
-                  >
-                    Back
-                  </button>
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    (click)="stepper.reset()"
-                  >
-                    Reset
-                  </button>
-                </div>
-              </mat-step>
-            </mat-horizontal-stepper> -->
           </div>
         </div>
       </div>

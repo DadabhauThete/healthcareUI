@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -6,6 +6,7 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { MemberRegistrationService } from "src/app/shared/services/member.registration.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-registermember",
@@ -13,6 +14,7 @@ import { MemberRegistrationService } from "src/app/shared/services/member.regist
   styleUrls: ["./registermember.component.sass"],
 })
 export class RegistermemberComponent implements OnInit {
+  @ViewChild("f") myNgForm;
   registerMember: FormGroup;
   isLinear = false;
   respondata: any;
@@ -21,13 +23,19 @@ export class RegistermemberComponent implements OnInit {
   HFormGroup2: FormGroup;
   hide = true;
   errors: any;
+  maxDate = new Date();
+  removeClass: boolean = false;
+
   constructor(
     private fb: FormBuilder,
-    private memberregistration: MemberRegistrationService
+    private memberregistration: MemberRegistrationService,
+    private snackBar: MatSnackBar,
+    private el: ElementRef
   ) {
     this.initForm();
   }
-  snackPositionTopCenter() {}
+  myTag = this.el.nativeElement.querySelector("mat-form-field");
+
   initForm() {
     this.registerMember = this.fb.group({
       personal: this.fb.group({
@@ -72,37 +80,7 @@ export class RegistermemberComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.HFormGroup1 = this.fb.group({
-      firstName: ["", Validators.required],
-      middleName: [""],
-      lastname: ["", Validators.required],
-      gender: ["", [Validators.required]],
-      dateOfBirth: ["", [Validators.required]],
-      age: [],
-      email: [
-        "",
-        [
-          Validators.required,
-          Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$"),
-        ],
-      ],
-      contactNo: [
-        "",
-        [
-          Validators.required,
-          Validators.maxLength(10),
-          Validators.pattern("^[0-9]+$"),
-        ],
-      ],
-    });
-    this.HFormGroup2 = this.fb.group({
-      address1: ["", [Validators.required]],
-      address2: ["", [Validators.required]],
-      country: ["", [Validators.required]],
-      state: ["", [Validators.required]],
-      city: ["", [Validators.required]],
-      zipCode: ["", [Validators.required]],
-    });
+    this.getAge();
   }
   get firstName() {
     return this.registerMember.get(["personal", "firstName"]);
@@ -148,8 +126,13 @@ export class RegistermemberComponent implements OnInit {
     return this.registerMember.get(["address", "zipCode"]);
   }
   onRegister() {
+    let colorName = "snackbar-success";
+    let text = "Member Register Successfully!!!";
+    let placementFrom = "top";
+    let placementAlign = "center";
     if (this.registerMember.value) {
       console.log("Form Value", this.registerMember.value);
+      this.showNotification(colorName, text, placementFrom, placementAlign);
       this.memberregistration.registerUser(this.registerMember.value).subscribe(
         (result) => {
           // Handle result
@@ -158,16 +141,40 @@ export class RegistermemberComponent implements OnInit {
         (error) => {
           this.errors = error;
         },
-        () => {
-          // 'onCompleted' callback.
-          // No errors, route to new page here
-        }
+        () => this.registerMember.reset()
       );
-      this.onReset();
+      this.removeClass = true;
+      this.registerMember.reset();
     }
   }
   onReset() {
-    this.submitted = false;
     this.registerMember.reset();
+  }
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, "", {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
+
+  selectDate;
+  currentDate = new Date();
+  diffYear;
+  ageYear: any;
+  updateCalcs() {
+    console.log(this.registerMember.get(["personal", "dateOfBirth"])?.value);
+    this.selectDate = this.registerMember.get([
+      "personal",
+      "dateOfBirth",
+    ])?.value;
+  }
+  getAge() {
+    this.diffYear =
+      (this.currentDate.getTime() - this.selectDate.getTime()) / 1000;
+    this.diffYear /= 60 * 60 * 24;
+    return (this.ageYear = Math.abs(Math.round(this.diffYear / 365.25)));
+    console.log(this.ageYear);
   }
 }
