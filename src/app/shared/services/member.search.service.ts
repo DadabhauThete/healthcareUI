@@ -28,13 +28,12 @@ export class MemberSearch {
     );
   }
 
-  getMembersListById(id:number) {
+  getMembersListById(id: number) {
     let queryParams = new HttpParams();
-    queryParams = queryParams.append("patientID",id);
-    return this.http.get(
-      `${environment.baseUrl}Patient/GetPatientSummary`,{params:queryParams}
-
-    );
+    queryParams = queryParams.append("patientID", id);
+    return this.http.get(`${environment.baseUrl}Patient/GetPatientSummary`, {
+      params: queryParams,
+    });
   }
 
   processError(err: any) {

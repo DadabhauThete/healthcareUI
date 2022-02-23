@@ -204,11 +204,11 @@
                       >
 
                       <a
-                        ><mat-icon
-                          class="msr-2"
-                          matSuffix
-                          (click)="onViewClick(member.patientID)"
-                        >
+                        [routerLink]="[
+                          '/admin/dashboard/membersummary',
+                          member.patientID
+                        ]"
+                        ><mat-icon class="msr-2" matSuffix>
                           visibility
                         </mat-icon></a
                       >
