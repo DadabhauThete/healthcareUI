@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:Release": "ng build --prod --base-href /",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -44,10 +45,10 @@
     "angular-gauge": "^4.0.0",
     "apexcharts": "^3.32.0",
     "bootstrap": "^5.1.3",
-    "browser-sync": "^2.27.7",
+    "browser-sync": "^0.9.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.20.0",
-    "echarts": "^4.9.0",
+    "echarts": "^5.3.0",
     "moment": "^2.29.1",
     "ng-apexcharts": "^1.6.0",
     "ng-click-outside": "^9.0.0",
@@ -69,7 +70,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.1.2",
+    "@angular-devkit/build-angular": "^13.2.4",
     "@angular/cli": "^13.1.2",
     "@angular/compiler-cli": "^13.1.1",
     "@angular/language-service": "^13.1.1",
