@@ -16,7 +16,7 @@
             <div class="header">
               <h2>Available Benefit Plans</h2>
             </div>
-            {{ member | json }}
+            <!-- {{ member | json }} -->
             <div class="info-box-wrapp">
               <h5 class="info-box-title">Personal Details</h5>
               <table class="table blank-table">
@@ -28,10 +28,10 @@
                     <th scope="col">Address</th>
                   </tr>
                   <tr>
-                    <td>Steve William</td>
-                    <td>12348765</td>
-                    <td>12/09/1996</td>
-                    <td>10 A, 1 4th C St</td>
+                    <td>{{member.personal.firstName}}</td>
+                    <td>{{member.personal.patientID}}</td>
+                    <td>{{member.personal.dateOfBirth}}</td>
+                    <td>{{member.address.address1 + ' '}} {{member.address.address2}}</td>
                   </tr>
                   <tr>
                     <th scope="col">Country</th>
@@ -40,10 +40,10 @@
                     <th scope="col">Zip Code</th>
                   </tr>
                   <tr>
-                    <td>USA</td>
-                    <td>NC</td>
-                    <td>Marion</td>
-                    <td>28752</td>
+                    <td>{{member.address.country}}</td>
+                    <td>{{member.address.state}}</td>
+                    <td>{{member.address.city}}</td>
+                    <td>{{member.address.zipCode}}</td>
                   </tr>
                 </tbody>
               </table>

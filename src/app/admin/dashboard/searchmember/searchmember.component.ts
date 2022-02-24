@@ -4,6 +4,7 @@ import { MemberSearch } from "src/app/shared/services/member.search.service";
 import { Members } from "./member";
 import { Observable, of, throwError } from "rxjs";
 import { Router } from "@angular/router";
+import { stringify } from "querystring";
 
 @Component({
   selector: "app-searchmember",
@@ -28,13 +29,13 @@ export class SearchmemberComponent implements OnInit {
   }
   initForm() {
     this.search = this.fb.group({
-      patientId: [, [Validators.pattern("^[0-9]+$")]],
-      firstName: [],
-      middleName: [],
-      lastname: [],
-      dateOfBirth: [],
-      age: [],
-      contactNo: [
+      patientId: ['', [Validators.pattern("^[0-9]+$")]],
+      firstName: [''],
+      middleName: [''],
+      lastname: [''],
+      dateOfBirth: [''],
+      age: [''],
+      contactNo: [''
         ,
         [
           // Validators.required,
@@ -48,32 +49,34 @@ export class SearchmemberComponent implements OnInit {
   onRegister() {
     console.log("Form Value", this.search.value);
   }
-  onAddClick() {
-    console.log("add clicked");
-  }
-  onViewClick(id: number) {
-    console.log(id);
-    this.searchmember.getMembersListById(id).subscribe((data) => {
-      this.memberById = data;
-      console.log("memberById", this.memberById, data);
-    });
-    this.router.navigate(["/admin/dashboard/membersummary"]);
+
+  checkType(){
+    const values = this.search.value;
+    values.patientId === '' || values.patientId === null ? values.patientId = 0 : Number(values.patientId);
+      values.age === '' || values.age === null ? values.age = 0 : Number(values.age);
+      values.firstName === '' || values.firstName === null ? values.firstName = '' : values.firstName;
+      values.middleName === '' || values.middleName === null ? values.middleName = '' : values.middleName;
+      values.lastname === '' || values.lastname === null ? values.lastname = '' : values.lastname;
+      values.dateOfBirth === '' || values.dateOfBirth === null ? values.dateOfBirth = null : values.dateOfBirth;
+      values.contactNo === '' || values.contactNo === null ? values.contactNo = '' : values.contactNo;
   }
 
   onSearch() {
     const values = this.search.value;
     const isNullish = Object.values(values).every((value) => {
-      if (value === null) {
+      if (value === ''||value === null) {
         return true;
       }
       return false;
     });
     if (isNullish) {
       alert("please enter atleast one value");
+      console.log(values)
     } else if (values) {
-      values.patientId === null ? (values.patientId = 0) : values.patientId;
-      values.age === null ? (values.age = 0) : values.age;
-      console.log(values.patientId);
+      this.checkType();
+      console.log(values);
+      
+     
       this.searchmember.getMembersList(values).subscribe(
         (data) => {
           this.members = data;
@@ -87,5 +90,6 @@ export class SearchmemberComponent implements OnInit {
       );
     }
     console.log(isNullish);
+    this.search.reset();
   }
 }

@@ -5,7 +5,7 @@
       <app-breadcrumb
         [title]="'Search Member'"
         [items]="[]"
-        [active_item]="'Dashboad'"
+        [active_item]="'Dashboard'"
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
@@ -30,7 +30,12 @@
                     appearance="outline"
                   >
                     <mat-label>Account No. </mat-label>
-                    <input matInput formControlName="patientId" min="0" />
+                    <input
+                      matInput
+                      formControlName="patientId"
+                      min="0"
+                      type="number"
+                    />
                     <mat-icon matSuffix>face </mat-icon>
                   </mat-form-field>
                 </div>
@@ -143,18 +148,6 @@
         <div class="card">
           <div class="header">
             <h2>Response</h2>
-            <button
-              mat-button
-              [matMenuTriggerFor]="menu"
-              class="header-dropdown"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Action</button>
-              <button mat-menu-item>Another action</button>
-              <button mat-menu-item>Something else here</button>
-            </mat-menu>
           </div>
           <div class="tableBody">
             <div class="table-responsive">
@@ -193,15 +186,8 @@
                           ></app-feather-icons
                         ></a>
                       </button> -->
-                      <mat-icon class="msr-2" matSuffix (click)="onAddClick()"
-                        >note_add</mat-icon
-                      >
-                      <mat-icon
-                        class="msr-2"
-                        matSuffix
-                        (click)="onAssignClick()"
-                        >assignment</mat-icon
-                      >
+                      <mat-icon class="msr-2" matSuffix>note_add</mat-icon>
+                      <mat-icon class="msr-2" matSuffix>assignment</mat-icon>
 
                       <a
                         [routerLink]="[

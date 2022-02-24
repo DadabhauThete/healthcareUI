@@ -47,7 +47,7 @@ export class RegistermemberComponent implements OnInit {
             Validators.pattern("^[_A-z0-9]*((-|s)*[_A-z0-9])*$"),
           ],
         ],
-        middleName: ["", [Validators.required]],
+        middleName: [""],
         lastname: ["", [Validators.required]],
         gender: ["", [Validators.required]],
         dateOfBirth: ["", [Validators.required]],

@@ -5,7 +5,7 @@
       <app-breadcrumb
         [title]="'Benefit Plan'"
         [items]="[]"
-        [active_item]="'Dashboad'"
+        [active_item]="'Dashboard'"
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
@@ -29,7 +29,7 @@
                   >
                     <mat-label>Company name </mat-label>
                     <input matInput formControlName="companyName" required />
-                    <mat-icon matSuffix>face </mat-icon>
+                    <mat-icon matSuffix>location_city </mat-icon>
                     <mat-error
                       *ngIf="
                         addbenefitplan.get('companyName').hasError('required')
@@ -46,7 +46,7 @@
                   >
                     <mat-label>Plan name </mat-label>
                     <input matInput formControlName="planName" />
-                    <mat-icon matSuffix>face </mat-icon>
+                    <mat-icon matSuffix>view_list </mat-icon>
                     <mat-error
                       *ngIf="
                         addbenefitplan.get('planName').hasError('required')
@@ -69,14 +69,14 @@
                         >{{ insurance }}</mat-option
                       >
                     </mat-select>
-                    <mat-icon matSuffix>face </mat-icon>
-                    <!-- <mat-error
+                    <mat-icon matSuffix>featured_play_list </mat-icon>
+                    <mat-error
                       *ngIf="
-                        addbenefitplan.get('planName').hasError('required')
+                        addbenefitplan.get('insuranceType').hasError('required')
                       "
                     >
                       Plan name is required
-                    </mat-error> -->
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -94,14 +94,14 @@
                         >{{ i }}</mat-option
                       >
                     </mat-select>
-                    <mat-icon matSuffix>face </mat-icon>
-                    <!-- <mat-error
+                    <mat-icon matSuffix>format_list_numbered </mat-icon>
+                    <mat-error
                       *ngIf="
                         addbenefitplan.get('planDuration').hasError('required')
                       "
                     >
                       Plan Duration is required
-                    </mat-error> -->
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -112,6 +112,7 @@
                     <mat-label>Start Date</mat-label>
                     <input
                       matInput
+                      [min]="todayDate"
                       [matDatepicker]="startdate"
                       formControlName="planStartDate"
                     />
@@ -120,13 +121,13 @@
                       [for]="startdate"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #startdate></mat-datepicker>
-                    <!-- <mat-error
+                    <mat-error
                       *ngIf="
-                        addbenefitplan.get('startdate').hasError('required')
+                        addbenefitplan.get('planStartDate').hasError('required')
                       "
                     >
                       Start Date is required
-                    </mat-error> -->
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -137,6 +138,7 @@
                     <mat-label>End Date</mat-label>
                     <input
                       matInput
+                      [min]="todayDate"
                       [matDatepicker]="enddate"
                       formControlName="planEndDate"
                     />
@@ -145,11 +147,13 @@
                       [for]="enddate"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #enddate></mat-datepicker>
-                    <!-- <mat-error
-                      *ngIf="addbenefitplan.get('enddate').hasError('required')"
+                    <mat-error
+                      *ngIf="
+                        addbenefitplan.get('planEndDate').hasError('required')
+                      "
                     >
                       End Date is required
-                    </mat-error> -->
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -180,6 +184,7 @@
                   >
                     <mat-label>Description</mat-label>
                     <textarea matInput formControlName="description"></textarea>
+                    <!-- <mat-icon matSuffix>description</mat-icon> -->
                     <!-- <mat-error
                       *ngIf="
                         addbenefitplan.get('description').hasError('required')
@@ -211,18 +216,6 @@
         <div class="card">
           <div class="header">
             <h2>Available Benefit Plans</h2>
-            <button
-              mat-button
-              [matMenuTriggerFor]="menu"
-              class="header-dropdown"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Action</button>
-              <button mat-menu-item>Another action</button>
-              <button mat-menu-item>Something else here</button>
-            </mat-menu>
           </div>
           <div class="tableBody">
             <div class="table-responsive">

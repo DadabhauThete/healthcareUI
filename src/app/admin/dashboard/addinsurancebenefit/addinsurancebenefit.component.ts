@@ -9,6 +9,8 @@ import { Benefit } from "../addinsurancebenefit/benefit";
   styleUrls: ["./addinsurancebenefit.component.sass"],
 })
 export class AddinsurancebenefitComponent implements OnInit {
+  //today's date
+  todayDate: Date = new Date();
   benefits: Benefit[] = [];
   // Form 1
   benefit: any;
@@ -35,7 +37,7 @@ export class AddinsurancebenefitComponent implements OnInit {
       planStartDate: ["", [Validators.required]],
       planEndDate: ["", [Validators.required]],
       isAcive: ["", [Validators.required]],
-      description: ["", [Validators.required]],
+      description: [""],
     });
   }
 

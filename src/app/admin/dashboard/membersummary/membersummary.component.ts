@@ -21,9 +21,9 @@ export class MembersummaryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params["patientID"];
+    this.id = this.route.snapshot.params["id"];
     console.log(this.id, "Page Id");
-    this.memebersearch
+    this.memberdata
       .getMembersListById(this.id)
       .subscribe((data: MemberData) => {
         this.member = data;

@@ -3,6 +3,7 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from "@angular/common/http";
 import { retry, catchError, map } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
@@ -29,6 +30,7 @@ export class MemberSummary {
       .pipe(catchError(this.errorHandler));
   }
 
+
   errorHandler(error) {
     let errorMessage = "";
     if (error.error instanceof ErrorEvent) {
@@ -38,4 +40,14 @@ export class MemberSummary {
     }
     return throwError(errorMessage);
   }
+
+  getMembersListById(id: number) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("patientID", id);
+    return this.http.get(`${environment.baseUrl}Patient/GetPatientSummary`, {
+      params: queryParams,
+    });
+  }
 }
+
+

@@ -5,7 +5,7 @@
       <app-breadcrumb
         [title]="'Register Member'"
         [items]="[]"
-        [active_item]="'Dashboad'"
+        [active_item]="'Dashboard'"
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
@@ -52,13 +52,13 @@
                       <mat-label>Middle name </mat-label>
                       <input matInput formControlName="middleName" />
                       <mat-icon matSuffix>face </mat-icon>
-                      <mat-error
+                      <!-- <mat-error
                         *ngIf="
                           middleName && middleName.invalid && middleName.touched
                         "
                       >
                         Middle name is required
-                      </mat-error>
+                      </mat-error> -->
                     </mat-form-field>
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -276,7 +276,16 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                    &nbsp;
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                    &nbsp;
+                  </div>
+
+                  <div
+                    class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2 text-end"
+                  >
                     <button
                       class="btn-space"
                       [disabled]="registerMember.invalid"
