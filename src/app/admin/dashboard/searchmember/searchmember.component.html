@@ -112,12 +112,7 @@
                   >
                     <mat-label>Contact Number</mat-label>
 
-                    <input
-                      matInput
-                      placeholder="EX: (435) 345 34 54"
-                      mask="(000) 000 00 00"
-                      formControlName="contactNo"
-                    />
+                    <input matInput formControlName="contactNo" />
                     <mat-icon class="msr-2" matSuffix>phone</mat-icon>
                     <mat-error
                       *ngIf="search.get('contactNo').hasError('required')"
