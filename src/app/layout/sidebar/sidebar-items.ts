@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/admin/dashboard/addbenefitplan",
-    title: "Add Benefit Plan",
+    title: "Benefit Plan",
     moduleName: "dashboard",
     iconType: "material-icons-two-tone",
     icon: "event_note",

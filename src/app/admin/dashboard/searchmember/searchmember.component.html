@@ -67,6 +67,8 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
                   <mat-form-field
                     class="example-full-width"
@@ -121,7 +123,15 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  &nbsp;
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                  &nbsp;
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2 text-end">
                   <button class="btn-space" mat-raised-button color="primary">
                     Search
                   </button>
@@ -157,7 +167,7 @@
                     <td class="table-img">
                       {{ member.patientID }}
                     </td>
-                    <td>{{ member.firstName }}</td>
+                    <td>{{ member.firstName }} {{ member.lastname }}</td>
                     <td class="text-truncate">
                       {{ member.gender }}
                     </td>
@@ -166,20 +176,15 @@
                       {{ member.age }}
                     </td>
                     <td>{{ member.contactNo }}</td>
-                    <td>
-                      <a href="#"
+                    <td class="action_wrapp">
+                      <a href="#" class="btn-style"
                         ><app-feather-icons
-                          [icon]="'edit'"
-                          [class]="'tbl-fav-edit'"
-                        ></app-feather-icons
-                      ></a>
-                      <a href="#"
-                        ><app-feather-icons
-                          [icon]="'list'"
-                          [class]="'tbl-fav-list'"
+                          [icon]="'plus'"
+                          [class]="'tbl-fav-plus'"
                         ></app-feather-icons
                       ></a>
                       <a
+                        class="btn-style"
                         [routerLink]="[
                           '/admin/dashboard/membersummary',
                           member.patientID
@@ -203,3 +208,9 @@
     </div>
   </div>
 </section>
+<style>
+  a.btn-style {
+    margin-right: 10px;
+    font-size: 12px !important;
+  }
+</style>
