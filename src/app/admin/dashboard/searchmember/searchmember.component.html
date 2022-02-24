@@ -5,16 +5,13 @@
       <app-breadcrumb
         [title]="'Search Member'"
         [items]="[]"
-        [active_item]="'Dashboard'"
+        [active_item]="'Dashboad'"
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
     <div class="row clearfix">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
-          <!-- <div class="header">
-            <h2>Reactive Forms (Outline)</h2>
-          </div> -->
           <div class="body">
             <form
               class="register-form m-4"
@@ -118,7 +115,6 @@
                     <input
                       matInput
                       placeholder="EX: (435) 345 34 54"
-                      prefix="+91 "
                       mask="(000) 000 00 00"
                       formControlName="contactNo"
                     />
@@ -136,8 +132,6 @@
                   </button>
                 </div>
               </div>
-              <!-- <div class="row">
-              </div> -->
             </form>
           </div>
         </div>
@@ -178,33 +172,32 @@
                     </td>
                     <td>{{ member.contactNo }}</td>
                     <td>
-                      <!-- <button mat-icon-button class="tbl-action-btn">
-                        <a>
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons
-                        ></a>
-                      </button> -->
-                      <mat-icon class="msr-2" matSuffix>note_add</mat-icon>
-                      <mat-icon class="msr-2" matSuffix>assignment</mat-icon>
-
+                      <a href="#"
+                        ><app-feather-icons
+                          [icon]="'edit'"
+                          [class]="'tbl-fav-edit'"
+                        ></app-feather-icons
+                      ></a>
+                      <a href="#"
+                        ><app-feather-icons
+                          [icon]="'list'"
+                          [class]="'tbl-fav-list'"
+                        ></app-feather-icons
+                      ></a>
                       <a
                         [routerLink]="[
                           '/admin/dashboard/membersummary',
                           member.patientID
                         ]"
-                        ><mat-icon class="msr-2" matSuffix>
-                          visibility
-                        </mat-icon></a
-                      >
+                        ><app-feather-icons
+                          [icon]="'eye'"
+                          [class]="'tbl-fav-eye'"
+                        ></app-feather-icons
+                      ></a>
                     </td>
                   </tr>
                   <tr *ngIf="!isMember" style="text-align: center">
                     <td colspan="7">Members Data is not available.</td>
-                  </tr>
-                  <tr *ngIf="error" style="text-align: center">
-                    <td colspan="7">Member is not found</td>
                   </tr>
                 </tbody>
               </table>

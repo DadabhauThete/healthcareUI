@@ -5,7 +5,7 @@
       <app-breadcrumb
         [title]="'Member Summary'"
         [items]="[]"
-        [active_item]="'Dashboad'"
+        [active_item]="'Dashboard'"
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
@@ -13,37 +13,36 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card card-statistic-2">
           <div class="body">
-            <div class="header">
-              <h2>Available Benefit Plans</h2>
-            </div>
-            <!-- {{ member | json }} -->
+            <div class="header"></div>
             <div class="info-box-wrapp">
               <h5 class="info-box-title">Personal Details</h5>
               <table class="table blank-table">
                 <tbody>
                   <tr>
-                    <th scope="col">Member Name</th>
-                    <th scope="col">Account Number</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Member First Name</th>
+                    <th scope="col">Member Middle Name</th>
+                    <th scope="col">Member Last Name</th>
+                    <th scope="col">Age</th>
                   </tr>
                   <tr>
-                    <td>{{member.personal.firstName}}</td>
-                    <td>{{member.personal.patientID}}</td>
-                    <td>{{member.personal.dateOfBirth}}</td>
-                    <td>{{member.address.address1 + ' '}} {{member.address.address2}}</td>
+                    <td>{{ member.personal.firstName }}</td>
+                    <td>{{ member.personal.middleName }}</td>
+                    <td>{{ member.personal.lastname }}</td>
+                    <td>{{ member.personal.age }}</td>
                   </tr>
                   <tr>
-                    <th scope="col">Country</th>
-                    <th scope="col">State</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Zip Code</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date Of Birth</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact Number</th>
                   </tr>
                   <tr>
-                    <td>{{member.address.country}}</td>
-                    <td>{{member.address.state}}</td>
-                    <td>{{member.address.city}}</td>
-                    <td>{{member.address.zipCode}}</td>
+                    <td>{{ member.personal.gender }}</td>
+                    <td>
+                      {{ member.personal.dateOfBirth | date: "MM/dd/yyyy" }}
+                    </td>
+                    <td>{{ member.personal.email }}</td>
+                    <td>{{ member.personal.contactNo }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -53,28 +52,28 @@
               <table class="table blank-table">
                 <tbody>
                   <tr>
-                    <th scope="col">Member Name</th>
-                    <th scope="col">Account Number</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Address</th>
-                  </tr>
-                  <tr>
-                    <td>Steve William</td>
-                    <td>12348765</td>
-                    <td>12/09/1996</td>
-                    <td>10 A, 1 4th C St</td>
-                  </tr>
-                  <tr>
+                    <th scope="col">Address 1</th>
+                    <th scope="col">Address 2</th>
                     <th scope="col">Country</th>
                     <th scope="col">State</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Zip Code</th>
                   </tr>
                   <tr>
-                    <td>USA</td>
-                    <td>NC</td>
-                    <td>Marion</td>
-                    <td>28752</td>
+                    <td>{{ member.address.address1 }}</td>
+                    <td>{{ member.address.address2 }}</td>
+                    <td>{{ member.address.country }}</td>
+                    <td>{{ member.address.state }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">City</th>
+                    <th scope="col">Zipcode</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                  <tr>
+                    <td>{{ member.address.city }}</td>
+                    <td>{{ member.address.zipCode }}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </table>
@@ -193,7 +192,7 @@
     top: -2px;
   }
   .info-box-wrapp {
-    border: 1px solid #fd7e14;
+    border: 1px solid #000;
     border-radius: 10px;
     padding: 30px;
     margin-top: 30px;
@@ -202,14 +201,14 @@
   }
   .info-box-wrapp h5.info-box-title {
     display: inline-block;
-    background: #fd7e14;
+    background: #f0f3fb;
     position: absolute;
     top: -23px;
     padding: 12px 30px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;
-    color: #fff;
+    color: #444;
   }
   .blank-table th,
   .blank-table td {
