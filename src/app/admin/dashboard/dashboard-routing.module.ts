@@ -37,7 +37,7 @@ const routes: Routes = [
     component: AddinsurancebenefitComponent,
   },
   {
-    path: "viewinsurancebenefit",
+    path: "assigned-benefit-plan",
     component: ViewinsurancebenefitComponent,
   },
   {

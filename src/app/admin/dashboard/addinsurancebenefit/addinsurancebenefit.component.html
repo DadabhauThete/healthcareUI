@@ -115,6 +115,7 @@
                       [min]="todayDate"
                       [matDatepicker]="startdate"
                       formControlName="planStartDate"
+                      (dateChange)="calculateDate()"
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -141,6 +142,9 @@
                       [min]="todayDate"
                       [matDatepicker]="enddate"
                       formControlName="planEndDate"
+                      [ngModel]="calculatedEndDate"
+                      [disabled]="isEndDateAvailable"
+
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -198,9 +202,9 @@
                   <button
                     type="submit"
                     class="btn-space"
-                    [disabled]="addbenefitplan.invalid"
                     mat-raised-button
                     color="primary"
+                    [disabled]="!addbenefitplan.valid"
                   >
                     Add Benefit
                   </button>
@@ -244,7 +248,7 @@
                     <td>{{ member.planDuration }}</td>
                     <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
                     <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
-                    <td>{{ member.isAcive }}</td>
+                    <td>{{ member.isAcive === true ? 'Yes' : 'No' }}</td>
 
                     <td>
                       <button mat-icon-button class="tbl-action-btn">

@@ -38,7 +38,7 @@ export class LockedComponent implements OnInit {
     if (this.authForm.invalid) {
       return;
     } else {
-      const role = this.authService.currentUserValue.role;
+      const role = this.authService.currentUserValue.roleName;
       if (role === Role.All || role === Role.Admin) {
         this.router.navigate(["/admin/dashboard/searchmember"]);
       } else if (role === Role.Doctor) {

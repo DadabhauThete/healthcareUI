@@ -1,9 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from "@angular/common/http";
+import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from "../models/user";
 import { environment } from "src/environments/environment";
+const httpOptions = {
+  headers: new HttpHeaders({ "Content-Type": "application/json" }),
+};
 
 @Injectable({
   providedIn: "root",
@@ -23,12 +30,9 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
+  login(data: any) {
     return this.http
-      .post<any>(`${environment.apiUrl}/authenticate`, {
-        username,
-        password,
-      })
+      .post<any>(`${environment.baseUrl}Account/login`, data, httpOptions)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -45,5 +49,17 @@ export class AuthService {
     localStorage.removeItem("currentUser");
     this.currentUserSubject.next(null);
     return of({ success: false });
+  }
+  // Error
+  handleError(error: HttpErrorResponse) {
+    let msg = "";
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      msg = error.error.message;
+    } else {
+      // server-side error
+      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(msg);
   }
 }

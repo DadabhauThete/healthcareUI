@@ -12,38 +12,7 @@ import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 import { User } from "../models/user";
 import { Role } from "../models/role";
 
-const users: User[] = [
-  {
-    id: 1,
-    img: "assets/images/user/admin.jpg",
-    username: "admin@gmail.com",
-    password: "admin123",
-    firstName: "Sarah",
-    lastName: "Smith",
-    role: Role.Admin,
-    token: "admin-token",
-  },
-  {
-    id: 2,
-    img: "assets/images/user/doctor.jpg",
-    username: "doctor@hospital.org",
-    password: "doctor@123",
-    firstName: "Ashton",
-    lastName: "Cox",
-    role: Role.Doctor,
-    token: "doctor-token",
-  },
-  {
-    id: 3,
-    img: "assets/images/user/patient.jpg",
-    username: "patient@hospital.org",
-    password: "patient@123",
-    firstName: "Cara",
-    lastName: "Stevens",
-    role: Role.Patient,
-    token: "patient-token",
-  },
-];
+const users: User[] = [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -68,9 +37,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { username, password } = body;
+      const { emailId, password } = body;
       const user = users.find(
-        (x) => x.username === username && x.password === password
+        (x) => x.emailId === emailId && x.password === password
       );
       if (!user) {
         return error("Username or password is incorrect");
@@ -79,9 +48,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         id: user.id,
         img: user.img,
         username: user.username,
+        emailId: user.emailId,
         firstName: user.firstName,
         lastName: user.lastName,
-        role: user.role,
+        roleName: user.roleName,
         token: user.token,
       });
     }

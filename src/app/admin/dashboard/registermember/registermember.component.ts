@@ -25,6 +25,10 @@ export class RegistermemberComponent implements OnInit {
   errors: any;
   maxDate = new Date();
   removeClass: boolean = false;
+  selectDate:any;
+  currentDate = new Date();
+  isAgeAvailable:boolean = false;
+  ageYear: any;
 
   constructor(
     private fb: FormBuilder,
@@ -51,7 +55,7 @@ export class RegistermemberComponent implements OnInit {
         lastname: ["", [Validators.required]],
         gender: ["", [Validators.required]],
         dateOfBirth: ["", [Validators.required]],
-        age: ["", [Validators.required, Validators.maxLength(2)]],
+        age: ["", [Validators.maxLength(2)]],
         email: [
           "",
           [
@@ -125,6 +129,39 @@ export class RegistermemberComponent implements OnInit {
   get zipCode() {
     return this.registerMember.get(["address", "zipCode"]);
   }
+
+  showNotification(colorName, text, placementFrom, placementAlign) {
+    this.snackBar.open(text, "", {
+      duration: 2000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
+
+
+  updateCalcs() {
+    console.log(this.registerMember.get(["personal", "dateOfBirth"])?.value);
+    this.selectDate = this.registerMember.get([
+      "personal",
+      "dateOfBirth",
+    ])?.value;
+  }
+
+  showAge(){
+    this.getAge();
+    console.log(this.ageYear);
+  }
+  getAge() {
+    let diffYear =
+      (this.currentDate.getTime() - this.selectDate.getTime()) / 1000;
+    diffYear /= 60 * 60 * 24;
+    this.ageYear = Math.abs(Math.round(diffYear / 365.25));
+    this.isAgeAvailable = true
+    return this.ageYear
+  }
+
+
   onRegister() {
     let colorName = "snackbar-success";
     let text = "Member Register Successfully!!!";
@@ -150,31 +187,5 @@ export class RegistermemberComponent implements OnInit {
   onReset() {
     this.registerMember.reset();
   }
-  showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, "", {
-      duration: 2000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName,
-    });
-  }
-
-  selectDate;
-  currentDate = new Date();
-  diffYear;
-  ageYear: any;
-  updateCalcs() {
-    console.log(this.registerMember.get(["personal", "dateOfBirth"])?.value);
-    this.selectDate = this.registerMember.get([
-      "personal",
-      "dateOfBirth",
-    ])?.value;
-  }
-  getAge() {
-    this.diffYear =
-      (this.currentDate.getTime() - this.selectDate.getTime()) / 1000;
-    this.diffYear /= 60 * 60 * 24;
-    return (this.ageYear = Math.abs(Math.round(this.diffYear / 365.25)));
-    console.log(this.ageYear);
-  }
+  
 }

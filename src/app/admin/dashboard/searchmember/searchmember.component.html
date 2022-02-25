@@ -177,7 +177,11 @@
                     </td>
                     <td>{{ member.contactNo }}</td>
                     <td class="action_wrapp">
-                      <a href="#" class="btn-style"
+                      <a
+                        class="btn-style"
+                        [routerLink]="[
+                          '/admin/dashboard/assigned-benefit-plan'
+                        ]"
                         ><app-feather-icons
                           [icon]="'plus'"
                           [class]="'tbl-fav-plus'"

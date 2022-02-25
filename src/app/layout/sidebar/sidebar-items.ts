@@ -10,7 +10,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin", "Doctor"],
+    role: ["0", "Doctor"],
     submenu: [],
   },
   {
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin", "Doctor"],
+    role: ["0", "Doctor"],
     submenu: [],
   },
   {
@@ -36,11 +36,11 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin", "Doctor"],
+    role: ["0", "Doctor"],
     submenu: [],
   },
   {
-    path: "/admin/dashboard/viewinsurancebenefit",
+    path: "/admin/dashboard/assigned-benefit-plan",
     title: "Assign Benefit Plan",
     moduleName: "dashboard",
     iconType: "material-icons-two-tone",
@@ -49,7 +49,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin", "Doctor"],
+    role: ["0", "Doctor"],
     submenu: [],
   },
   {
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     badge: "",
     badgeClass: "",
-    role: ["Admin", "Doctor"],
+    role: ["0", "Doctor"],
     submenu: [],
   },
   // Admin Modules

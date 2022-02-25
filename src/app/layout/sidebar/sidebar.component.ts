@@ -100,7 +100,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     if (this.authService.currentUserValue) {
-      const userRole = this.authService.currentUserValue.role;
+      const userRole = this.authService.currentUserValue.roleName;
       this.userFullName =
         this.authService.currentUserValue.firstName +
         " " +

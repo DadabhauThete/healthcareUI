@@ -108,6 +108,8 @@
                         formControlName="dateOfBirth"
                         [max]="maxDate"
                         (ngModelChange)="updateCalcs()"
+                        (dateChange)="showAge()"
+                        
                       />
                       <mat-datepicker-toggle
                         matSuffix
@@ -134,7 +136,7 @@
                       <span matSuffix>
                         <mat-icon class="msr-2">child_care</mat-icon>
                       </span>
-                      <input matInput type="number" formControlName="age" />
+                      <input matInput type="number" formControlName="age"  [ngModel]="ageYear" disabled/>
                       <mat-error *ngIf="age && age.invalid && age.touched">
                         Age is required
                       </mat-error>

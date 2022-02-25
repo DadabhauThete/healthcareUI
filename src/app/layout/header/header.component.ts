@@ -103,7 +103,7 @@ export class HeaderComponent
   ];
   ngOnInit() {
     this.config = this.configService.configData;
-    const userRole = this.authService.currentUserValue.role;
+    const userRole = this.authService.currentUserValue.roleName;
     this.userImg = this.authService.currentUserValue.img;
 
     if (userRole === "Admin") {
