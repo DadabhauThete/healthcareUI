@@ -7,6 +7,7 @@ export interface Member {
     gender: string;
     dateOfBirth: string;
     age: number;
+    ssn: number;
     email: string;
     contactNo: string;
   };

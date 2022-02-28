@@ -25,9 +25,9 @@ export class RegistermemberComponent implements OnInit {
   errors: any;
   maxDate = new Date();
   removeClass: boolean = false;
-  selectDate:any;
+  selectDate: any;
   currentDate = new Date();
-  isAgeAvailable:boolean = false;
+  isAgeAvailable: boolean = false;
   ageYear: any;
 
   constructor(
@@ -55,7 +55,8 @@ export class RegistermemberComponent implements OnInit {
         lastname: ["", [Validators.required]],
         gender: ["", [Validators.required]],
         dateOfBirth: ["", [Validators.required]],
-        age: ["", [Validators.maxLength(2)]],
+        age: [{ value: "", disabled: true }],
+        ssn: ["", [Validators.required]],
         email: [
           "",
           [
@@ -74,7 +75,7 @@ export class RegistermemberComponent implements OnInit {
       }),
       address: this.fb.group({
         address1: ["", [Validators.required]],
-        address2: ["", [Validators.required]],
+        address2: [""],
         country: ["", [Validators.required]],
         state: ["", [Validators.required]],
         city: ["", [Validators.required]],
@@ -104,6 +105,9 @@ export class RegistermemberComponent implements OnInit {
   }
   get age() {
     return this.registerMember.get(["personal", "age"]);
+  }
+  get ssn() {
+    return this.registerMember.get(["personal", "ssn"]);
   }
   get email() {
     return this.registerMember.get(["personal", "email"]);
@@ -139,7 +143,6 @@ export class RegistermemberComponent implements OnInit {
     });
   }
 
-
   updateCalcs() {
     console.log(this.registerMember.get(["personal", "dateOfBirth"])?.value);
     this.selectDate = this.registerMember.get([
@@ -148,7 +151,7 @@ export class RegistermemberComponent implements OnInit {
     ])?.value;
   }
 
-  showAge(){
+  showAge() {
     this.getAge();
     console.log(this.ageYear);
   }
@@ -157,10 +160,9 @@ export class RegistermemberComponent implements OnInit {
       (this.currentDate.getTime() - this.selectDate.getTime()) / 1000;
     diffYear /= 60 * 60 * 24;
     this.ageYear = Math.abs(Math.round(diffYear / 365.25));
-    this.isAgeAvailable = true
-    return this.ageYear
+    this.isAgeAvailable = true;
+    return this.ageYear;
   }
-
 
   onRegister() {
     let colorName = "snackbar-success";
@@ -187,5 +189,4 @@ export class RegistermemberComponent implements OnInit {
   onReset() {
     this.registerMember.reset();
   }
-  
 }

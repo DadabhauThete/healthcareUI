@@ -109,7 +109,6 @@
                         [max]="maxDate"
                         (ngModelChange)="updateCalcs()"
                         (dateChange)="showAge()"
-                        
                       />
                       <mat-datepicker-toggle
                         matSuffix
@@ -136,11 +135,34 @@
                       <span matSuffix>
                         <mat-icon class="msr-2">child_care</mat-icon>
                       </span>
-                      <input matInput type="number" formControlName="age"  [ngModel]="ageYear" disabled/>
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="age"
+                        [ngModel]="ageYear"
+                        disabled
+                      />
                       <mat-error *ngIf="age && age.invalid && age.touched">
                         Age is required
                       </mat-error>
                     </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Social Security Number</mat-label>
+                        <span matSuffix>
+                          <mat-icon class="msr-2">security</mat-icon>
+                        </span>
+                        <input matInput type="number" formControlName="ssn" />
+                        <mat-error *ngIf="ssn && ssn.invalid && ssn.touched">
+                          SSN is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
                   </div>
                 </div>
                 <div class="header ps-0 pt-0">

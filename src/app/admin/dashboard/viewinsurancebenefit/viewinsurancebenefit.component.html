@@ -19,174 +19,77 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Patient Name</th>
-                      <th>Assigned Doctor</th>
-                      <th>Date</th>
-                      <th>Diseases</th>
-                      <th>Actions</th>
+                      <th>Member Name</th>
+                      <th>Adddress</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Country</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td class="table-img">
                         <img src="assets/images/user/user1.jpg" alt="" />
-                      </td>
-                      <td>John Doe</td>
-                      <td>
-                        <a href="mailto:test@gmail.com"> Dr.Jacob Ryan </a>
-                      </td>
-                      <td>12/05/2016</td>
-                      <td>
-                        <div class="badge col-red">Fever</div>
+                        <!-- {{ member | json }} -->
                       </td>
                       <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user2.jpg" alt="" />
-                      </td>
-                      <td>Sarah Smith</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Rajesh </a></td>
-                      <td>12/05/2016</td>
-                      <td>
-                        <div class="badge col-green">Cholera</div>
+                        {{ member.personal.firstName }}
+                        {{ member.personal.lastname }}
                       </td>
                       <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
+                        {{ member.address.address1 }}
+                        {{ member.address.address2 }}
                       </td>
-                    </tr>
-                    <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user3.jpg" alt="" />
-                      </td>
-                      <td>Airi Satou</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Jay Soni </a></td>
-                      <td>12/05/2016</td>
+                      <td>{{ member.address.city }}</td>
                       <td>
-                        <div class="badge col-purple">Jaundice</div>
+                        {{ member.address.state }}
                       </td>
                       <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user4.jpg" alt="" />
-                      </td>
-                      <td>Angelica Ramos</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.John Deo </a></td>
-                      <td>12/05/2016</td>
-                      <td>
-                        <div class="badge col-purple">Typhod</div>
-                      </td>
-                      <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user5.jpg" alt="" />
-                      </td>
-                      <td>Ashton Cox</td>
-                      <td>
-                        <a href="mailto:test@gmail.com"> Dr.Megha Trivedi </a>
-                      </td>
-                      <td>12/05/2016</td>
-                      <td>
-                        <div class="badge col-orange">Maleria</div>
-                      </td>
-                      <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user8.jpg" alt="" />
-                      </td>
-                      <td>Cara Stevens</td>
-                      <td>
-                        <a href="mailto:test@gmail.com"> Dr.Sarah Smith </a>
-                      </td>
-                      <td>12/05/2016</td>
-                      <td>
-                        <div class="badge col-cyan">Infection</div>
-                      </td>
-                      <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'edit'"
-                            [class]="'tbl-fav-edit'"
-                          ></app-feather-icons>
-                        </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                          ></app-feather-icons>
-                        </button>
+                        {{ member.address.country }}
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+            <div class="header">
+              <h2>Assigned Benefit Plan</h2>
+            </div>
+            <form
+              class="register-form m-4"
+              [formGroup]="assignbenefitplan"
+              (ngSubmit)="onAssignBenefit()"
+            >
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Select Benefit Plan</mat-label>
+                    <mat-select formControlName="planDuration">
+                      <!-- {{ listplans | json }} -->
+                      <mat-option
+                        *ngFor="let Category of responsedata.data.value"
+                        [value]="Category.insuranceInfoId"
+                        >{{ Category.planName }}
+                      </mat-option>
+                      <mat-option value="option2">Option 2</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                  <button
+                    type="submit"
+                    class="btn-space"
+                    mat-raised-button
+                    color="primary"
+                  >
+                    Assign Benefit
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

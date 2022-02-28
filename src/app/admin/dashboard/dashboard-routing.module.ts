@@ -41,6 +41,10 @@ const routes: Routes = [
     component: ViewinsurancebenefitComponent,
   },
   {
+    path: "assigned-benefit-plan/:id",
+    component: ViewinsurancebenefitComponent,
+  },
+  {
     path: "membersummary",
     component: MembersummaryComponent,
   },

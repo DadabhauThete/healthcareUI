@@ -22,16 +22,16 @@ export class SearchmemberComponent implements OnInit {
     private fb: FormBuilder,
     private searchmember: MemberSearch,
     private router: Router,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {
     this.initForm();
   }
   initForm() {
     this.search = this.fb.group({
       patientId: ["", [Validators.pattern("^[0-9]+$")]],
-      firstName: [""],
-      middleName: [""],
-      lastname: [""],
+      firstName: ["", [Validators.pattern("^[a-zA-Z]*$")]],
+      middleName: ["", [Validators.pattern("^[a-zA-Z]*$")]],
+      lastname: ["", [Validators.pattern("^[a-zA-Z]*$")]],
       dateOfBirth: [""],
       age: [""],
       contactNo: [
@@ -92,10 +92,10 @@ export class SearchmemberComponent implements OnInit {
     });
     if (isNullish) {
       let colorName = "black";
-          let text = "Please enter atleast one value!";
-          let placementFrom = "top";
-          let placementAlign = "center";
-          this.showNotification(colorName, text, placementFrom, placementAlign);
+      let text = "Please enter atleast one value!";
+      let placementFrom = "top";
+      let placementAlign = "center";
+      this.showNotification(colorName, text, placementFrom, placementAlign);
       console.log(values);
     } else if (values) {
       this.checkType();
@@ -108,13 +108,14 @@ export class SearchmemberComponent implements OnInit {
           this.error = false;
         },
         (error) => {
+          this.error = error;
           let colorName = "snackbar-danger";
           let text = "Member not found!!!";
           let placementFrom = "top";
           let placementAlign = "center";
           this.showNotification(colorName, text, placementFrom, placementAlign);
           this.isMember = false;
-          this.error = error;
+
           console.log(this.error);
           this.members = [];
         }
