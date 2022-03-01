@@ -9,16 +9,20 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Benefit } from "../../admin/dashboard/addinsurancebenefit/benefit";
+import { number } from "echarts";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
+
+
 
 @Injectable({
   providedIn: "root",
 })
 export class AddBenefitPlanService {
   errorHandler: any;
+  deleteId:number;
   constructor(private router: Router, private http: HttpClient) {}
 
   benefit: Benefit;
@@ -26,5 +30,19 @@ export class AddBenefitPlanService {
     return this.http
       .post(`${environment.baseUrl}Benfit/AddBenfitPlan`, benefit, httpOptions)
       .pipe(catchError(this.errorHandler));
+  }
+
+  deleteBenefitPlan(id: number): Observable<any> {
+    return this.http
+      .delete(`${environment.baseUrl}Benfit/${id}`, httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  setDeleteId(id:number){
+    this.deleteId = id;
+  }
+
+  getDeleteId(){
+    return this.deleteId
   }
 }

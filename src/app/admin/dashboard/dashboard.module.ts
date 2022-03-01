@@ -26,6 +26,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatSelectModule } from "@angular/material/select";
 
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import {MatDialogModule} from '@angular/material/dialog';
+import { Deletemodel } from "./addinsurancebenefit/deleteModel/deletemodel.component";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { NgxDatatableModule } from "@swimlane/ngx-datatable";
     AddinsurancebenefitComponent,
     ViewinsurancebenefitComponent,
     MembersummaryComponent,
+    Deletemodel
   ],
   imports: [
     CommonModule,
@@ -56,6 +59,7 @@ import { NgxDatatableModule } from "@swimlane/ngx-datatable";
     MatSelectModule,
 
     NgxDatatableModule,
+    MatDialogModule
   ],
 })
 export class DashboardModule {}

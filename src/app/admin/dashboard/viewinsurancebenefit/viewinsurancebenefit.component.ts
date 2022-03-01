@@ -63,8 +63,7 @@ export class ViewinsurancebenefitComponent implements OnInit {
 
       let startDateYear = this.assignbenefitplan.value.startDate.getFullYear();
       let addedDuration = startDateYear + this.assignbenefitplan.value.term;
-      // console.log(addedDuration, "addedDuration");
-      // console.log(typeof addedDuration, "addedDuration");
+
       let endDate =
         this.assignbenefitplan.value.endDate.setFullYear(addedDuration);
       let convertedDate = new Date(endDate).toISOString();
@@ -117,7 +116,6 @@ export class ViewinsurancebenefitComponent implements OnInit {
   }
   onItemChange(event) {
     this.insuranceId = event.value;
-    //console.log(this.assignbenefitplan.value.insuranceId, "event radio");
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();

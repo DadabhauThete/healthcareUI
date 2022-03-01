@@ -4,6 +4,9 @@ import { AddBenefitPlanService } from "../../../shared/services/add.benefitplan.
 import { GetBenefitPlanService } from "../../../shared/services/get.benefitplan.service";
 import { Benefit } from "../addinsurancebenefit/benefit";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { Deletemodel } from "./deleteModel/deleteModel.Component";
+
 
 @Component({
   selector: "app-addinsurancebenefit",
@@ -21,6 +24,7 @@ export class AddinsurancebenefitComponent implements OnInit {
   addbenefitplan: FormGroup;
   hide = true;
   errors: any;
+  memberDeleteId:number;
   plandurationnumber = [1, 3, 5, 10, 15, 20, 25];
   insurance = ["Medical", "Dental"];
   labelPosition: "before" | "after" = "after";
@@ -28,7 +32,8 @@ export class AddinsurancebenefitComponent implements OnInit {
     private fb: FormBuilder,
     private benefitservice: AddBenefitPlanService,
     public benefitsList: GetBenefitPlanService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.initForm();
   }
@@ -84,6 +89,22 @@ export class AddinsurancebenefitComponent implements OnInit {
       panelClass: colorName,
     });
   }
+
+  onEdit(member){
+    console.log('onEdit click')
+  }
+
+  openDialog(member:any) {
+    const dialogRef = this.dialog.open(Deletemodel);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(member.insuranceInfoId);
+      this.benefitservice.deleteBenefitPlan(member.insuranceInfoId).subscribe((result)=>{
+        console.log(result);
+        this.getBenefitDataList();
+      })
+    });
+  }
+
   onRegister() {
     console.log(this.addbenefitplan.value.planEndDate);
     if (this.addbenefitplan.valid) {

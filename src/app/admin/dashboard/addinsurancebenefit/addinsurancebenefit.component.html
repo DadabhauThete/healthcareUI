@@ -255,12 +255,15 @@
                         <app-feather-icons
                           [icon]="'edit'"
                           [class]="'tbl-fav-edit'"
+                          (click)="onEdit(member)"
                         ></app-feather-icons>
                       </button>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons
+                        mat-button
                           [icon]="'trash-2'"
                           [class]="'tbl-fav-delete'"
+                          (click)="openDialog(member)"
                         ></app-feather-icons>
                       </button>
                     </td>
