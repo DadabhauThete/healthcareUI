@@ -12,13 +12,15 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card card-statistic-2">
+          <div class="header">
+            <h2>Member Details</h2>
+          </div>
           <div class="body">
             <div class="tableBody">
               <div class="table-responsive">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
                       <th>Member Name</th>
                       <th>Adddress</th>
                       <th>City</th>
@@ -28,10 +30,6 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="table-img">
-                        <img src="assets/images/user/user1.jpg" alt="" />
-                        <!-- {{ member | json }} -->
-                      </td>
                       <td>
                         {{ member.personal.firstName }}
                         {{ member.personal.lastname }}
@@ -52,47 +50,185 @@
                 </table>
               </div>
             </div>
-            <div class="header">
-              <h2>Assigned Benefit Plan</h2>
-            </div>
-            <form
-              class="register-form m-4"
-              [formGroup]="assignbenefitplan"
-              (ngSubmit)="onAssignBenefit()"
-            >
-              <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Select Benefit Plan</mat-label>
-                    <mat-select formControlName="planDuration">
-                      <!-- {{ listplans | json }} -->
-                      <mat-option
-                        *ngFor="let Category of responsedata.data.value"
-                        [value]="Category.insuranceInfoId"
-                        >{{ Category.planName }}
-                      </mat-option>
-                      <mat-option value="option2">Option 2</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
-                  <button
-                    type="submit"
-                    class="btn-space"
-                    mat-raised-button
-                    color="primary"
-                  >
-                    Assign Benefit
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Available Benefit Plans</h2>
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <!-- {{ benefit.data | json }} -->
+
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Company Name</th>
+                    <th>Plan Name</th>
+                    <th>Insurance Type</th>
+                    <th>Plan Duration</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Is Active</th>
+                    <th>Select Plan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let member of responsedata.data">
+                    <td class="table-img">
+                      {{ member.companyName }}
+                    </td>
+                    <td>{{ member.planName }}</td>
+                    <td>{{ member.insuranceType }}</td>
+                    <td>{{ member.planDuration }}</td>
+                    <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
+
+                    <td>
+                      <mat-radio-button
+                        class="selectplan"
+                        value="{{ member.insuranceInfoId }}"
+                        (change)="onItemChange($event, scroll(target))"
+                      >
+                      </mat-radio-button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix" #target>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Assign Benefit Plans</h2>
+          </div>
+          <form
+            class="register-form m-4"
+            [formGroup]="assignbenefitplan"
+            (ngSubmit)="onAssignBenefit()"
+          >
+            <div class="row">
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Plan Duration Number</mat-label>
+                  <mat-select formControlName="term">
+                    <mat-option
+                      [value]="i"
+                      *ngFor="let i of plandurationnumber"
+                      >{{ i }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-icon matSuffix>format_list_numbered </mat-icon>
+                  <mat-error
+                    *ngIf="assignbenefitplan.get('term').hasError('required')"
+                  >
+                    Plan Duration is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Start Date</mat-label>
+                  <input
+                    matInput
+                    [min]="todayDate"
+                    [matDatepicker]="startdate"
+                    formControlName="startDate"
+                    (dateChange)="calculateDate()"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="startdate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #startdate></mat-datepicker>
+                  <mat-error
+                    *ngIf="
+                      assignbenefitplan.get('startDate').hasError('required')
+                    "
+                  >
+                    Start Date is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>End Date</mat-label>
+                  <input
+                    matInput
+                    [min]="todayDate"
+                    [matDatepicker]="enddate"
+                    formControlName="endDate"
+                    [ngModel]="calculatedEndDate"
+                    [disabled]="isEndDateAvailable"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="enddate"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #enddate></mat-datepicker>
+                  <mat-error
+                    *ngIf="
+                      assignbenefitplan.get('endDate').hasError('required')
+                    "
+                  >
+                    End Date is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                <label class="example-margin">Is Active</label>
+                <mat-radio-group formControlName="isActive">
+                  <mat-radio-button
+                    class="example-margin"
+                    name="isActive"
+                    checked
+                    value="0"
+                    [checked]="true"
+                    >Yes</mat-radio-button
+                  >
+                  <mat-radio-button
+                    class="example-margin"
+                    name="isActive"
+                    value="1"
+                    >No
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                <button
+                  type="submit"
+                  class="btn-space"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]=""
+                >
+                  Assign Benefit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
+<style>
+  .selectplan {
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    width: 50px;
+  }
+</style>

@@ -4,8 +4,10 @@ import { MemberSummary } from "../../../shared/services/member.summary.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MemberData } from "../membersummary/member.summary";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AssignBenefit } from "./assignbenefitplan";
+import { Benefit } from "../addinsurancebenefit/benefit";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { AssignBenefit } from "./assignbenefitplan";
+import { AssignBenfitPlanService } from "../../../shared/services/assign.benfitplan.service";
 @Component({
   selector: "app-viewinsurancebenefit",
   templateUrl: "./viewinsurancebenefit.component.html",
@@ -14,33 +16,61 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class ViewinsurancebenefitComponent implements OnInit {
   id: number;
   member: MemberData;
-  benefits: any;
   responsedata;
   assignbenefitplan: FormGroup;
-  benefit: AssignBenefit[] = [];
+  patientId: number;
+  insuranceId: number;
+  benefits: Benefit[] = [];
   error: any;
-  lists: any;
-
+  errors: any;
+  plandurationnumber = [1, 3, 5, 10, 15, 20, 25];
+  //today's date
+  todayDate: Date = new Date();
+  calculatedEndDate: any;
+  isEndDateAvailable: boolean = true;
   constructor(
     public benefitsList: GetBenefitPlanService,
     private memberdata: MemberSummary,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private assignbenefit: AssignBenfitPlanService
   ) {
     this.initForm();
   }
   initForm() {
     this.assignbenefitplan = this.fb.group({
-      patientId: ["", [Validators.pattern("^[0-9]+$")]],
-      insuranceId: ["", [Validators.pattern("^[a-zA-Z]*$")]],
-      term: [],
-      startDate: [],
-      endDate: [],
-      isActive: [],
-      oldBenfitPlanId: [],
+      patientId: [],
+      insuranceId: [],
+      term: ["", [Validators.required]],
+      startDate: ["", [Validators.required]],
+      endDate: ["", [Validators.required]],
+      isActive: ["", [Validators.required]],
+      oldBenfitPlanId: [0],
     });
+  }
+
+  calculateDate() {
+    if (this.assignbenefitplan.value.startDate) {
+      this.assignbenefitplan.value.endDate = new Date();
+      console.log("start", this.assignbenefitplan.value.startDate);
+      console.log("end", this.assignbenefitplan.value.endDate);
+
+      let startDateYear = this.assignbenefitplan.value.startDate.getFullYear();
+      let addedDuration = startDateYear + this.assignbenefitplan.value.term;
+      // console.log(addedDuration, "addedDuration");
+      // console.log(typeof addedDuration, "addedDuration");
+      let endDate =
+        this.assignbenefitplan.value.endDate.setFullYear(addedDuration);
+      let convertedDate = new Date(endDate).toISOString();
+      this.assignbenefitplan.value.endDate = convertedDate;
+      this.calculatedEndDate = convertedDate;
+      this.isEndDateAvailable = true;
+
+      console.log("start", this.assignbenefitplan.value.startDate);
+      console.log("end", this.assignbenefitplan.value.endDate);
+    }
   }
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, "", {
@@ -74,18 +104,43 @@ export class ViewinsurancebenefitComponent implements OnInit {
     this.benefitsList.getAllBenefitPlan().subscribe(
       (result) => {
         this.responsedata = result;
-        //console.log(this.responsedata.data, "this.responsedata");
-        // this.benefits.data.companyName
-        this.responsedata.data.forEach(function (value) {
-          //this.lists = value;
-          console.log(value, "this.listvalue");
-        });
+        console.log(this.responsedata, "this.responsedata");
       },
       (error) => {
         this.error = error;
       }
     );
   }
-
-  onAssignBenefit() {}
+  onItemChange(event) {
+    this.insuranceId = event.value;
+    //console.log(this.assignbenefitplan.value.insuranceId, "event radio");
+  }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+  onAssignBenefit() {
+    // console.log(this.assignbenefitplan.value);
+    if (this.assignbenefitplan.valid) {
+      this.assignbenefitplan.value.patientId = Number(this.id);
+      this.assignbenefitplan.value.insuranceId = Number(this.insuranceId);
+      this.assignbenefitplan.value.isActive = Number(
+        this.assignbenefitplan.value.isActive
+      );
+      this.assignbenefit.addBenefitPlan(this.assignbenefitplan.value).subscribe(
+        (result) => {
+          let colorName = "snackbar-success";
+          let text = "Benefit plan added successfully!!!";
+          let placementFrom = "top";
+          let placementAlign = "center";
+          this.showNotification(colorName, text, placementFrom, placementAlign);
+          console.log(result, "Member Register Succusfully");
+          this.assignbenefitplan.reset();
+        },
+        (error) => {
+          this.errors = error;
+        },
+        () => this.assignbenefitplan.reset()
+      );
+    }
+  }
 }
