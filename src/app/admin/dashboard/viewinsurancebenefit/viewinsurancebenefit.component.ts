@@ -3,7 +3,12 @@ import { GetBenefitPlanService } from "../../../shared/services/get.benefitplan.
 import { MemberSummary } from "../../../shared/services/member.summary.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MemberData } from "../membersummary/member.summary";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from "@angular/forms";
 import { Benefit } from "../addinsurancebenefit/benefit";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AssignBenefit } from "./assignbenefitplan";
@@ -46,11 +51,10 @@ export class ViewinsurancebenefitComponent implements OnInit {
       term: ["", [Validators.required]],
       startDate: ["", [Validators.required]],
       endDate: ["", [Validators.required]],
-      isActive: ["", [Validators.required]],
+      isActive: ["0", [Validators.required]],
       oldBenfitPlanId: [0],
     });
   }
-
   calculateDate() {
     if (this.assignbenefitplan.value.startDate) {
       this.assignbenefitplan.value.endDate = new Date();
@@ -74,7 +78,7 @@ export class ViewinsurancebenefitComponent implements OnInit {
   }
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, "", {
-      duration: 2000,
+      duration: 5000,
       verticalPosition: placementFrom,
       horizontalPosition: placementAlign,
       panelClass: colorName,
@@ -118,7 +122,7 @@ export class ViewinsurancebenefitComponent implements OnInit {
   scroll(el: HTMLElement) {
     el.scrollIntoView();
   }
-  onAssignBenefit() {
+  onAssignBenefit(formData: any, formDirective: FormGroupDirective) {
     // console.log(this.assignbenefitplan.value);
     if (this.assignbenefitplan.valid) {
       this.assignbenefitplan.value.patientId = Number(this.id);
@@ -134,12 +138,18 @@ export class ViewinsurancebenefitComponent implements OnInit {
           let placementAlign = "center";
           this.showNotification(colorName, text, placementFrom, placementAlign);
           console.log(result, "Member Register Succusfully");
+          //Reset Form
+          formDirective.resetForm();
           this.assignbenefitplan.reset();
+          //Reset Form end
+          setTimeout(() => {
+            this.router.navigate(["/admin/dashboard/membersummary/" + this.id]);
+          }, 6000);
+          //this.assignbenefitplan.reset();
         },
         (error) => {
           this.errors = error;
-        },
-        () => this.assignbenefitplan.reset()
+        }
       );
     }
   }

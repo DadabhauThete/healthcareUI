@@ -60,46 +60,48 @@
           <div class="header">
             <h2>Available Benefit Plans</h2>
           </div>
-          <div class="tableBody">
-            <div class="table-responsive">
-              <!-- {{ benefit.data | json }} -->
+          <div class="body">
+            <div class="tableBody">
+              <div class="table-responsive">
+                <!-- {{ benefit.data | json }} -->
 
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Company Name</th>
-                    <th>Plan Name</th>
-                    <th>Insurance Type</th>
-                    <th>Plan Duration</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Is Active</th>
-                    <th>Select Plan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let member of responsedata.data">
-                    <td class="table-img">
-                      {{ member.companyName }}
-                    </td>
-                    <td>{{ member.planName }}</td>
-                    <td>{{ member.insuranceType }}</td>
-                    <td>{{ member.planDuration }}</td>
-                    <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
-                    <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
-                    <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Company Name</th>
+                      <th>Plan Name</th>
+                      <th>Insurance Type</th>
+                      <th>Plan Duration</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Is Active</th>
+                      <th>Select Plan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let member of responsedata.data">
+                      <td class="table-img">
+                        {{ member.companyName }}
+                      </td>
+                      <td>{{ member.planName }}</td>
+                      <td>{{ member.insuranceType }}</td>
+                      <td>{{ member.planDuration }}</td>
+                      <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
+                      <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
+                      <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
 
-                    <td>
-                      <mat-radio-button
-                        class="selectplan"
-                        value="{{ member.insuranceInfoId }}"
-                        (change)="onItemChange($event, scroll(target))"
-                      >
-                      </mat-radio-button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                      <td>
+                        <mat-radio-button
+                          class="selectplan"
+                          value="{{ member.insuranceInfoId }}"
+                          (change)="onItemChange($event, scroll(target))"
+                        >
+                        </mat-radio-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -114,7 +116,8 @@
           <form
             class="register-form m-4"
             [formGroup]="assignbenefitplan"
-            (ngSubmit)="onAssignBenefit()"
+            (ngSubmit)="onAssignBenefit(assignbenefitplan, formDirective)"
+            #formDirective="ngForm"
           >
             <div class="row">
               <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
