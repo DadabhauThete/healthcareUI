@@ -2,9 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { MemberData } from "./member.summary";
 import { MemberSummary } from "../../../shared/services/member.summary.service";
 import { MemberSearch } from "../../../shared/services/member.search.service";
-
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+} from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { SimpleDialogComponent } from "./simpleDialog.component";
+
 @Component({
   selector: "app-membersummary",
   templateUrl: "./membersummary.component.html",
@@ -13,12 +19,14 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class MembersummaryComponent implements OnInit {
   id: number;
   member: MemberData;
+  simpleDialog: MatDialogRef<SimpleDialogComponent>;
   constructor(
     private memberdata: MemberSummary,
     private route: ActivatedRoute,
     private memebersearch: MemberSearch,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialogModel: MatDialog
   ) {}
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, "", {
@@ -27,6 +35,9 @@ export class MembersummaryComponent implements OnInit {
       horizontalPosition: placementAlign,
       panelClass: colorName,
     });
+  }
+  dialog() {
+    this.simpleDialog = this.dialogModel.open(SimpleDialogComponent);
   }
   ngOnInit(): void {
     if (this.router.url === "/admin/dashboard/membersummary") {

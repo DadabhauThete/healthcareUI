@@ -160,9 +160,9 @@
                         <button mat-icon-button class="tbl-action-btn">
                           <app-feather-icons
                             mat-button
-                            [icon]="'trash-2'"
-                            [class]="'tbl-fav-delete'"
-                            (click)="openDialog(member)"
+                            [icon]="'x-square'"
+                            [class]="'tbl-fav-x-square'"
+                            (click)="dialog()"
                           ></app-feather-icons>
                         </button>
                       </td>
@@ -329,6 +329,11 @@
   .error-block {
     font-size: 14px;
     margin-top: 5px;
+    color: red;
+  }
+  i-feather.tbl-fav-x-square {
+    width: 20px;
+    height: 20px;
     color: red;
   }
 </style>
