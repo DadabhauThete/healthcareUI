@@ -18,4 +18,18 @@ export interface MemberData {
     city: string;
     zipCode: string;
   };
+  benfitPlanList: {
+    data: [
+      {
+        patientInsuranceId: number;
+        companyName: string;
+        planName: string;
+        insuranceType: string;
+        term: number;
+        isActive: number;
+        startDate: string;
+        endDate: string;
+      }
+    ];
+  };
 }

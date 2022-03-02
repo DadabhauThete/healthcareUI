@@ -46,7 +46,12 @@ export class MembersummaryComponent implements OnInit {
       .getMembersListById(this.id)
       .subscribe((data: MemberData) => {
         this.member = data;
+
         console.log(this.member, "Member Summary PAGE");
+        console.log(
+          this.member.benfitPlanList.data,
+          "Member Summary benfitPlanList"
+        );
       });
   }
 }
