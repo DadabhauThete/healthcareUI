@@ -9,7 +9,7 @@
       ></app-breadcrumb>
     </div>
     <!-- Widgets -->
-    <div class="row clearfix">
+    <div class="row clearfix" #target>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
@@ -19,7 +19,8 @@
             <form
               class="register-form m-4"
               [formGroup]="addbenefitplan"
-              (ngSubmit)="onRegister()"
+              (ngSubmit)="onRegister(addbenefitplan, formDirective)"
+              #formDirective="ngForm"
             >
               <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -91,6 +92,7 @@
                       <mat-option
                         [value]="i"
                         *ngFor="let i of plandurationnumber"
+                        (click)="calculateDate()"
                         >{{ i }}</mat-option
                       >
                     </mat-select>
@@ -144,7 +146,6 @@
                       formControlName="planEndDate"
                       [ngModel]="calculatedEndDate"
                       [disabled]="isEndDateAvailable"
-
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -204,9 +205,9 @@
                     class="btn-space"
                     mat-raised-button
                     color="primary"
-                    [disabled]="!addbenefitplan.valid"
+                    [disabled]="isEdit ? false : !addbenefitplan.valid"
                   >
-                    Add Benefit
+                    {{ isEdit ? "Update Benefit" : "Add Benefit" }}
                   </button>
                 </div>
               </div>
@@ -225,7 +226,7 @@
             <div class="table-responsive">
               <!-- {{ benefit.data | json }} -->
 
-              <table class="table table-hover">
+              <table class="table table-hover addbenefitplan">
                 <thead>
                   <tr>
                     <th>Company Name</th>
@@ -248,19 +249,19 @@
                     <td>{{ member.planDuration }}</td>
                     <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
                     <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
-                    <td>{{ member.isAcive === true ? 'Yes' : 'No' }}</td>
+                    <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
 
                     <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons
                           [icon]="'edit'"
                           [class]="'tbl-fav-edit'"
-                          (click)="onEdit(member)"
+                          (click)="onEditClick(member, scroll(target))"
                         ></app-feather-icons>
                       </button>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons
-                        mat-button
+                          mat-button
                           [icon]="'trash-2'"
                           [class]="'tbl-fav-delete'"
                           (click)="openDialog(member)"
@@ -277,3 +278,22 @@
     </div>
   </div>
 </section>
+<style>
+  .addbenefitplan tbody {
+    display: block;
+    height: 500px;
+    overflow: auto;
+  }
+  .addbenefitplan thead,
+  .addbenefitplan tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* even columns width , fix width of table too*/
+  }
+  .addbenefitplan tbody::-webkit-scrollbar {
+    display: none;
+  }
+  .addbenefitplan tbody {
+    -ms-overflow-style: none;
+  }
+</style>

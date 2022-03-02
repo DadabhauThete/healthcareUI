@@ -22,7 +22,6 @@ const httpOptions = {
 })
 export class AddBenefitPlanService {
   errorHandler: any;
-  deleteId:number;
   constructor(private router: Router, private http: HttpClient) {}
 
   benefit: Benefit;
@@ -32,17 +31,16 @@ export class AddBenefitPlanService {
       .pipe(catchError(this.errorHandler));
   }
 
+  editBenefitPlan(benefit: Benefit): Observable<any> {
+    return this.http
+      .put(`${environment.baseUrl}Benfit/${benefit.insuranceInfoId}`, benefit, httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
+
   deleteBenefitPlan(id: number): Observable<any> {
     return this.http
       .delete(`${environment.baseUrl}Benfit/${id}`, httpOptions)
       .pipe(catchError(this.errorHandler));
   }
 
-  setDeleteId(id:number){
-    this.deleteId = id;
-  }
-
-  getDeleteId(){
-    return this.deleteId
-  }
 }

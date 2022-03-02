@@ -16,8 +16,9 @@
             <form
               class="register-form m-4"
               [formGroup]="registerMember"
-              (ngSubmit)="onRegister()"
+              (ngSubmit)="onRegister(registerMember, formDirective)"
               novalidate
+              #formDirective="ngForm"
             >
               <div class="header ps-0 pt-0">
                 <h2>Personal Details</h2>

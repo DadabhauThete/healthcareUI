@@ -77,7 +77,7 @@ export class ViewinsurancebenefitComponent implements OnInit {
   }
   showNotification(colorName, text, placementFrom, placementAlign) {
     this.snackBar.open(text, "", {
-      duration: 5000,
+      duration: 2000,
       verticalPosition: placementFrom,
       horizontalPosition: placementAlign,
       panelClass: colorName,
@@ -142,7 +142,7 @@ export class ViewinsurancebenefitComponent implements OnInit {
           //Reset Form end
           setTimeout(() => {
             this.router.navigate(["/admin/dashboard/membersummary/" + this.id]);
-          }, 6000);
+          }, 3000);
           //this.assignbenefitplan.reset();
         },
         (error) => {

@@ -65,21 +65,29 @@
               <div class="table-responsive">
                 <!-- {{ benefit.data | json }} -->
 
-                <table class="table table-hover">
+                <table class="table table-hover available-benefit">
                   <thead>
                     <tr>
+                      <th>Action</th>
                       <th>Company Name</th>
                       <th>Plan Name</th>
                       <th>Insurance Type</th>
-                      <th>Plan Duration</th>
+                      <th>Term</th>
                       <th>Start Date</th>
                       <th>End Date</th>
-                      <th>Is Active</th>
-                      <th>Select Plan</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let member of responsedata.data">
+                      <td>
+                        <mat-radio-button
+                          class="selectplan"
+                          value="{{ member.insuranceInfoId }}"
+                          (change)="onItemChange($event, scroll(target))"
+                        >
+                        </mat-radio-button>
+                      </td>
                       <td class="table-img">
                         {{ member.companyName }}
                       </td>
@@ -89,15 +97,6 @@
                       <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
                       <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
                       <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
-
-                      <td>
-                        <mat-radio-button
-                          class="selectplan"
-                          value="{{ member.insuranceInfoId }}"
-                          (change)="onItemChange($event, scroll(target))"
-                        >
-                        </mat-radio-button>
-                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -208,8 +207,8 @@
                   </mat-radio-button>
                 </mat-radio-group>
               </div>
-
-              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">&nbsp;</div>
+              <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2 text-end">
                 <button
                   type="submit"
                   class="btn-space"
@@ -232,6 +231,23 @@
     text-align: center;
     display: block;
     margin: 10px auto;
-    width: 50px;
+  }
+
+  .available-benefit tbody {
+    display: block;
+    height: 500px;
+    overflow: auto;
+  }
+  .available-benefit thead,
+  .available-benefit tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* even columns width , fix width of table too*/
+  }
+  .available-benefit tbody::-webkit-scrollbar {
+    display: none;
+  }
+  .available-benefit tbody {
+    -ms-overflow-style: none;
   }
 </style>

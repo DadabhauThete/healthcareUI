@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
+  FormGroupDirective,
   Validators,
   AbstractControl,
 } from "@angular/forms";
@@ -53,7 +54,7 @@ export class RegistermemberComponent implements OnInit {
         ],
         middleName: [""],
         lastname: ["", [Validators.required]],
-        gender: ["", [Validators.required]],
+        gender: ["Male", [Validators.required]],
         dateOfBirth: ["", [Validators.required]],
         age: [{ value: "", disabled: true }],
         ssn: ["", [Validators.required]],
@@ -164,14 +165,14 @@ export class RegistermemberComponent implements OnInit {
     return this.ageYear;
   }
 
-  onRegister() {
+  onRegister(formData: any, formDirective: FormGroupDirective) {
     let colorName = "snackbar-success";
     let text = "Member Register Successfully!!!";
     let placementFrom = "top";
     let placementAlign = "center";
     if (this.registerMember.value) {
       console.log("Form Value", this.registerMember.value);
-      this.showNotification(colorName, text, placementFrom, placementAlign);
+
       this.memberregistration.registerUser(this.registerMember.value).subscribe(
         (result) => {
           // Handle result
@@ -179,11 +180,14 @@ export class RegistermemberComponent implements OnInit {
         },
         (error) => {
           this.errors = error;
-        },
-        () => this.registerMember.reset()
+        }
       );
       this.removeClass = true;
+      //Reset Form
+      formDirective.resetForm();
       this.registerMember.reset();
+      //Reset Form end
+      this.showNotification(colorName, text, placementFrom, placementAlign);
     }
   }
   onReset() {

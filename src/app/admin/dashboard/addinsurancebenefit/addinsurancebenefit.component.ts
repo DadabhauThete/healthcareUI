@@ -1,12 +1,16 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from "@angular/forms";
 import { AddBenefitPlanService } from "../../../shared/services/add.benefitplan.service";
 import { GetBenefitPlanService } from "../../../shared/services/get.benefitplan.service";
 import { Benefit } from "../addinsurancebenefit/benefit";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatDialog } from "@angular/material/dialog";
 import { Deletemodel } from "./deleteModel/deleteModel.Component";
-
 
 @Component({
   selector: "app-addinsurancebenefit",
@@ -24,10 +28,11 @@ export class AddinsurancebenefitComponent implements OnInit {
   addbenefitplan: FormGroup;
   hide = true;
   errors: any;
-  memberDeleteId:number;
+  // companyName:any;
   plandurationnumber = [1, 3, 5, 10, 15, 20, 25];
   insurance = ["Medical", "Dental"];
   labelPosition: "before" | "after" = "after";
+  isEdit: boolean = false;
   constructor(
     private fb: FormBuilder,
     private benefitservice: AddBenefitPlanService,
@@ -46,7 +51,7 @@ export class AddinsurancebenefitComponent implements OnInit {
       planDuration: [],
       planStartDate: ["", [Validators.required]],
       planEndDate: [""],
-      isAcive: ["", [Validators.required]],
+      isAcive: ["true", [Validators.required]],
       description: [""],
     });
   }
@@ -56,7 +61,10 @@ export class AddinsurancebenefitComponent implements OnInit {
   }
 
   calculateDate() {
-    if (this.addbenefitplan.value.planStartDate) {
+    if (
+      this.addbenefitplan.value.planStartDate &&
+      this.addbenefitplan.value.planDuration
+    ) {
       this.addbenefitplan.value.planEndDate = new Date();
       console.log("start", this.addbenefitplan.value.planStartDate);
       console.log("end", this.addbenefitplan.value.planEndDate);
@@ -89,51 +97,118 @@ export class AddinsurancebenefitComponent implements OnInit {
       panelClass: colorName,
     });
   }
-
-  onEdit(member){
-    console.log('onEdit click')
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+  onEditClick(member: any) {
+    this.isEdit = true;
+    console.log(member, "onEdit click");
+    member.isAcive === true
+      ? (member.isAcive = "true")
+      : (member.isAcive = "false");
+    // member.planStartDate = null;
+    this.addbenefitplan.patchValue(member);
+    console.log(this.addbenefitplan.value);
   }
 
-  openDialog(member:any) {
+  openDialog(member: any) {
     const dialogRef = this.dialog.open(Deletemodel);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(member.insuranceInfoId);
-      this.benefitservice.deleteBenefitPlan(member.insuranceInfoId).subscribe((result)=>{
-        console.log(result);
-        this.getBenefitDataList();
-      })
-    });
-  }
-
-  onRegister() {
-    console.log(this.addbenefitplan.value.planEndDate);
-    if (this.addbenefitplan.valid) {
-      console.log("inside if", this.addbenefitplan.value.planEndDate);
-      console.log(this.addbenefitplan.get(["isAcive"])?.value);
-      this.addbenefitplan.value["isAcive"] === "true"
-        ? (this.addbenefitplan.value["isAcive"] = true)
-        : (this.addbenefitplan.value["isAcive"] = false);
-
-      this.benefitservice.addBenefitPlan(this.addbenefitplan.value).subscribe(
+      this.benefitservice.deleteBenefitPlan(member.insuranceInfoId).subscribe(
         (result) => {
-          // Handle result
+          console.log(result);
           this.getBenefitDataList();
-          console.log(result, "Member Register Succusfully");
-          this.addbenefitplan.reset();
-          let colorName = "snackbar-success";
-          let text = "Benefit plan added successfully!!!";
-          let placementFrom = "top";
-          let placementAlign = "center";
-          this.showNotification(colorName, text, placementFrom, placementAlign);
+
+          console.log(this.showNotification);
         },
         (error) => {
           this.errors = error;
         },
         () => this.addbenefitplan.reset()
       );
-    }
+    });
+  }
 
-    console.log("Form Value", this.addbenefitplan.value);
-    // console.log('next', nextDate)
+  onRegister(formData: any, formDirective: FormGroupDirective) {
+    this.addbenefitplan.value["isAcive"] === "true"
+      ? (this.addbenefitplan.value["isAcive"] = true)
+      : (this.addbenefitplan.value["isAcive"] = false);
+    if (this.isEdit) {
+      //check for null values
+      const values = this.addbenefitplan.value;
+      const isNullish = Object.values(values).every((value) => {
+        if (value === null || value === "") {
+          return true;
+        }
+        return false;
+      });
+
+      //edit functionality
+      if (!isNullish) {
+        //edit scenario
+        if (this.addbenefitplan.value.planStartDate === null) {
+          let colorName = "snackbar-danger";
+          let text = "Please select plan Start date";
+          let placementFrom = "top";
+          let placementAlign = "center";
+          this.showNotification(colorName, text, placementFrom, placementAlign);
+        }
+        this.benefitservice
+          .editBenefitPlan(this.addbenefitplan.value)
+          .subscribe(
+            (result) => {
+              this.getBenefitDataList();
+              formDirective.resetForm();
+              this.addbenefitplan.reset();
+              console.log(result);
+              let colorName = "snackbar-success";
+              let text = "Benefit plan Updated successfully!!!";
+              let placementFrom = "top";
+              let placementAlign = "center";
+              this.showNotification(
+                colorName,
+                text,
+                placementFrom,
+                placementAlign
+              );
+            },
+            (error) => {
+              this.errors = error;
+            },
+            () => this.addbenefitplan.reset()
+          );
+        console.log("on edit action not null", isNullish);
+      } else {
+        console.log("null or empty", isNullish);
+      }
+      // add benefit plan
+    } else {
+      if (this.addbenefitplan.valid) {
+        this.benefitservice.addBenefitPlan(this.addbenefitplan.value).subscribe(
+          (result) => {
+            // Handle result
+            this.getBenefitDataList();
+            formDirective.resetForm();
+            this.addbenefitplan.reset();
+            let colorName = "snackbar-success";
+            let text = "Benefit plan added successfully!!!";
+            let placementFrom = "top";
+            let placementAlign = "center";
+            this.showNotification(
+              colorName,
+              text,
+              placementFrom,
+              placementAlign
+            );
+          },
+          (error) => {
+            this.errors = error;
+          },
+
+          () => this.addbenefitplan.reset()
+        );
+      }
+    }
   }
 }

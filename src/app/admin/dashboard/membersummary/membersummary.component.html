@@ -78,7 +78,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="info-box-wrapp">
+            <!-- <div class="info-box-wrapp">
               <h5 class="info-box-title">Insurance Information</h5>
               <table class="table blank-table">
                 <tbody>
@@ -108,6 +108,69 @@
                   </tr>
                 </tbody>
               </table>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Available Benefit Plans</h2>
+          </div>
+          <div class="body">
+            <div class="tableBody">
+              <div class="table-responsive">
+                <!-- {{ benefit.data | json }} -->
+
+                <table class="table table-hover available-benefit">
+                  <thead>
+                    <tr>
+                      <th>Company Name</th>
+                      <th>Plan Name</th>
+                      <th>Insurance Type</th>
+                      <th>Term</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <!-- <tr *ngFor="let member of responsedata.data">
+                      <td class="table-img">
+                        {{ member.companyName }}
+                      </td>
+                      <td>{{ member.planName }}</td>
+                      <td>{{ member.insuranceType }}</td>
+                      <td>{{ member.planDuration }}</td>
+                      <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
+                      <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
+                      <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
+
+                      <td>
+                        <mat-radio-button
+                          class="selectplan"
+                          value="{{ member.insuranceInfoId }}"
+                          (change)="onItemChange($event, scroll(target))"
+                        >
+                        </mat-radio-button>
+                      </td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
