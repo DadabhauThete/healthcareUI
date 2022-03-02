@@ -117,7 +117,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="header">
-            <h2>Available Benefit Plans</h2>
+            <h2>Assigned Benefit Plans</h2>
           </div>
           <div class="body">
             <div class="tableBody">
@@ -138,15 +138,34 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr *ngFor="let benefit of member.benfitPlanList.data">
+                      <td>{{ benefit.companyName }}</td>
+
+                      <td>{{ benefit.planName }}</td>
+                      <td>{{ benefit.insuranceType }}</td>
+                      <td>{{ benefit.term }}</td>
+                      <td>{{ benefit.startDate | date: "MM/dd/yyyy" }}</td>
+                      <td>{{ benefit.endDate | date: "MM/dd/yyyy" }}</td>
+                      <td>
+                        {{ benefit.isActive === 0 ? "Active" : "Terminate" }}
+                      </td>
+                      <td>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            [icon]="'edit'"
+                            [class]="'tbl-fav-edit'"
+                            (click)="onEditClick(member, scroll(target))"
+                          ></app-feather-icons>
+                        </button>
+                        <button mat-icon-button class="tbl-action-btn">
+                          <app-feather-icons
+                            mat-button
+                            [icon]="'trash-2'"
+                            [class]="'tbl-fav-delete'"
+                            (click)="openDialog(member)"
+                          ></app-feather-icons>
+                        </button>
+                      </td>
                     </tr>
                     <!-- <tr *ngFor="let member of responsedata.data">
                       <td class="table-img">

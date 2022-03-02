@@ -33,6 +33,7 @@ export class HeaderComponent
   langStoreValue: string;
   defaultFlag: string;
   isOpenSidebar: boolean;
+  userFullName: string;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -125,6 +126,14 @@ export class HeaderComponent
       }
     } else {
       this.flagvalue = val.map((element) => element.flag);
+    }
+    if (this.authService.currentUserValue) {
+      const userRole = this.authService.currentUserValue.roleName;
+      this.userFullName =
+        this.authService.currentUserValue.firstName +
+        " " +
+        this.authService.currentUserValue.lastName;
+      this.userImg = this.authService.currentUserValue.img;
     }
   }
 
