@@ -56,7 +56,7 @@ export class RegistermemberComponent implements OnInit {
         lastname: ["", [Validators.required]],
         gender: ["Male", [Validators.required]],
         dateOfBirth: ["", [Validators.required]],
-        age: [{ value: "", disabled: true }],
+        age: ["", { value: "", disabled: true }],
         ssn: ["", [Validators.required]],
         email: [
           "",

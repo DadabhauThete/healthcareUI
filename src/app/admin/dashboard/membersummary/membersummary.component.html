@@ -78,37 +78,6 @@
                 </tbody>
               </table>
             </div>
-            <!-- <div class="info-box-wrapp">
-              <h5 class="info-box-title">Insurance Information</h5>
-              <table class="table blank-table">
-                <tbody>
-                  <tr>
-                    <th scope="col">Insurance Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
-                  </tr>
-                  <tr>
-                    <td>CIGNA</td>
-                    <td>10 A, 1 4th C St</td>
-                    <td>Marion</td>
-                    <td>NC</td>
-                  </tr>
-                  <tr>
-                    <th scope="col">Zip Code</th>
-                    <th scope="col">Payer ID</th>
-                    <th scope="col">Plan/Product Name</th>
-                    <th scope="col">Coverage Phone</th>
-                  </tr>
-                  <tr>
-                    <td>28752</td>
-                    <td>62308</td>
-                    <td>CIGNA PPO</td>
-                    <td>9888034520</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> -->
           </div>
         </div>
       </div>
@@ -138,6 +107,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <tr *ngIf="datalist === true">
+                      <td colspan="8" style="text-align: center">
+                        Benefit plan not assigned. Click
+                        <a
+                          [routerLink]="[
+                            '/admin/dashboard/assigned-benefit-plan',
+                            member.personal.patientID
+                          ]"
+                          >here</a
+                        >
+                        to assign benefit plan
+                      </td>
+                    </tr>
                     <tr *ngFor="let benefit of member.benfitPlanList.data">
                       <td>{{ benefit.companyName }}</td>
 
@@ -162,31 +144,11 @@
                             mat-button
                             [icon]="'x-square'"
                             [class]="'tbl-fav-x-square'"
-                            (click)="dialog()"
+                            (click)="openDialog()"
                           ></app-feather-icons>
                         </button>
                       </td>
                     </tr>
-                    <!-- <tr *ngFor="let member of responsedata.data">
-                      <td class="table-img">
-                        {{ member.companyName }}
-                      </td>
-                      <td>{{ member.planName }}</td>
-                      <td>{{ member.insuranceType }}</td>
-                      <td>{{ member.planDuration }}</td>
-                      <td>{{ member.planStartDate | date: "MM/dd/yyyy" }}</td>
-                      <td>{{ member.planEndDate | date: "MM/dd/yyyy" }}</td>
-                      <td>{{ member.isAcive === true ? "Yes" : "No" }}</td>
-
-                      <td>
-                        <mat-radio-button
-                          class="selectplan"
-                          value="{{ member.insuranceInfoId }}"
-                          (change)="onItemChange($event, scroll(target))"
-                        >
-                        </mat-radio-button>
-                      </td>
-                    </tr> -->
                   </tbody>
                 </table>
               </div>

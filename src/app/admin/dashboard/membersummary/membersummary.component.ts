@@ -19,6 +19,7 @@ import { SimpleDialogComponent } from "./simpleDialog.component";
 export class MembersummaryComponent implements OnInit {
   id: number;
   member: MemberData;
+  datalist: boolean = false;
   simpleDialog: MatDialogRef<SimpleDialogComponent>;
   constructor(
     private memberdata: MemberSummary,
@@ -36,8 +37,14 @@ export class MembersummaryComponent implements OnInit {
       panelClass: colorName,
     });
   }
-  dialog() {
-    this.simpleDialog = this.dialogModel.open(SimpleDialogComponent);
+  // dialog() {
+  //   this.simpleDialog = this.dialogModel.open(SimpleDialogComponent);
+  // }
+  openDialog(): void {
+    const dialogRef = this.dialogModel.open(SimpleDialogComponent, {
+      width: "640px",
+      disableClose: true,
+    });
   }
   ngOnInit(): void {
     if (this.router.url === "/admin/dashboard/membersummary") {
@@ -59,10 +66,18 @@ export class MembersummaryComponent implements OnInit {
         this.member = data;
 
         console.log(this.member, "Member Summary PAGE");
-        console.log(
-          this.member.benfitPlanList.data,
-          "Member Summary benfitPlanList"
-        );
+        // console.log(
+        //   this.member.benfitPlanList.data,
+        //   "Member Summary benfitPlanList"
+        // );
+
+        if (this.member.benfitPlanList.data === null) {
+          console.log(
+            this.member.benfitPlanList.data,
+            "Member Summary benfitPlanList"
+          );
+          this.datalist = true;
+        }
       });
   }
 }
