@@ -136,7 +136,7 @@
                           <app-feather-icons
                             [icon]="'edit'"
                             [class]="'tbl-fav-edit'"
-                            (click)="onEditClick(member, scroll(target))"
+                            (click)="onEditClick(benefit, $event)"
                           ></app-feather-icons>
                         </button>
                         <button mat-icon-button class="tbl-action-btn">
@@ -144,9 +144,12 @@
                             mat-button
                             [icon]="'x-square'"
                             [class]="'tbl-fav-x-square'"
-                            (click)="openDialog()"
+                            (click)="openDialog(benefit, $event)"
                           ></app-feather-icons>
                         </button>
+                        <div *ngIf="dialogValue">
+                          <b>Value From Dialog</b>: {{ dialogValue }}
+                        </div>
                       </td>
                     </tr>
                   </tbody>
