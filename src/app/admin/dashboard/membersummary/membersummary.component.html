@@ -131,19 +131,19 @@
                         {{ benefit.isActive === 0 ? "Active" : "Terminate" }}
                       </td>
                       <td>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
+                        <button mat-icon-button class="tbl-action-btn" [disabled]="benefit.isActive === 1 ? true:false">
+                          <app-feather-icons 
                             [icon]="'edit'"
                             [class]="'tbl-fav-edit'"
-                            (click)="onEditClick(benefit, $event)"
+                            (click)="benefit.isActive !== 1 && onEditClick(benefit, $event)"
                           ></app-feather-icons>
                         </button>
-                        <button mat-icon-button class="tbl-action-btn">
-                          <app-feather-icons
+                        <button mat-icon-button class="tbl-action-btn" [disabled]="benefit.isActive === 1 ? true:false">
+                          <app-feather-icons 
                             mat-button
                             [icon]="'x-square'"
                             [class]="'tbl-fav-x-square'"
-                            (click)="openDialog(benefit, $event)"
+                            (click)="benefit.isActive !== 1 && openDialog(benefit, $event)"
                           ></app-feather-icons>
                         </button>
                         <div *ngIf="dialogValue">

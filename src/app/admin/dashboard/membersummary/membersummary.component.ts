@@ -33,6 +33,7 @@ export class MembersummaryComponent implements OnInit {
 
   //
   errors: any;
+  disabled:boolean = false;
   simpleDialog: MatDialogRef<DeleteAssignedBenefitPlanComponent>;
   constructor(
     private memberdata: MemberSummary,
@@ -83,7 +84,7 @@ export class MembersummaryComponent implements OnInit {
               console.log(result, "Plan Deleted Succusfully");
               //show pop up
               let colorName = "snackbar-success";
-              let text = "Plan Edit Succusfully!";
+              let text = "Plan Removed Succusfully!";
               let placementFrom = "top";
               let placementAlign = "center";
               this.showNotification(
@@ -158,7 +159,7 @@ export class MembersummaryComponent implements OnInit {
     });
   }
   // Delete Benefit Plan End
-  ngOnInit(): void {
+ ngOnInit(): void {
     if (this.router.url === "/admin/dashboard/membersummary") {
       //show pop up
       let colorName = "snackbar-danger";
@@ -182,7 +183,6 @@ export class MembersummaryComponent implements OnInit {
         //   this.member.benfitPlanList.data,
         //   "Member Summary benfitPlanList"
         // );
-
         if (this.member.benfitPlanList.data === null) {
           console.log(
             this.member.benfitPlanList.data,
