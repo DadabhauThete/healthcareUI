@@ -1,0 +1,336 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb
+          [title]="'Edit Member Details'"
+          [items]="[]"
+          [active_item]="'Dashboard'"
+        ></app-breadcrumb>
+      </div>
+      <!-- Widgets -->
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form
+                class="register-form m-4"
+                [formGroup]="Editmembersummary"
+                novalidate
+                #formDirective="ngForm"
+              >
+                <div class="header ps-0 pt-0">
+                  <h2>Personal Details</h2>
+                </div>
+                <div formGroupName="personal">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                        [class]="
+                          removeClass == true ? 'removeBorder' : 'sameBorder'
+                        "
+                      >
+                        <mat-label>First name </mat-label>
+                        <input matInput formControlName="firstName" required />
+                        <mat-icon matSuffix>face </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="
+                            firstName && firstName.invalid && firstName.touched
+                          "
+                        >
+                          First name is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Middle name </mat-label>
+                        <input matInput formControlName="middleName" />
+                        <mat-icon matSuffix>face </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="
+                            middleName && middleName.invalid && middleName.touched
+                          "
+                        >
+                          Middle name is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Last name </mat-label>
+                        <input matInput formControlName="lastname" />
+                        <mat-icon matSuffix>face </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="lastname && lastname.invalid && lastname.touched"
+                        >
+                          Last name is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <label class="example-margin m-t-10">Gender</label>
+                      <mat-radio-group
+                        aria-label="Select an option"
+                        formControlName="gender"
+                      >
+                        <mat-radio-button value="Male" name="gender" checked
+                          >Male</mat-radio-button
+                        >
+                        <mat-radio-button
+                          value="Female"
+                          name="gender"
+                          value="Female"
+                          >Female
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+  
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Date of Birth</mat-label>
+                        <input
+                          matInput
+                          [matDatepicker]="picker"
+                          formControlName="dateOfBirth"
+                          [max]="maxDate"
+                        />
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <!-- <mat-error
+                          *ngIf="
+                            dateOfBirth &&
+                            dateOfBirth.invalid &&
+                            dateOfBirth.touched
+                          "
+                        >
+                          Date Of Birth is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Age</mat-label>
+                        <span matSuffix>
+                          <mat-icon class="msr-2">child_care</mat-icon>
+                        </span>
+                        <input
+                          matInput
+                          type="number"
+                          formControlName="age"
+                          [ngModel]="ageYear"
+                          disabled
+                        />
+                        <!-- <mat-error *ngIf="age && age.invalid && age.touched">
+                          Age is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="outline"
+                        >
+                          <mat-label>Social Security Number</mat-label>
+                          <span matSuffix>
+                            <mat-icon class="msr-2">security</mat-icon>
+                          </span>
+                          <input matInput type="number" formControlName="ssn" />
+                          <!-- <mat-error *ngIf="ssn && ssn.invalid && ssn.touched">
+                            SSN is required
+                          </mat-error> -->
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="header ps-0 pt-0">
+                    <h2>Contact Details</h2>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Email </mat-label>
+                        <input matInput formControlName="email" required />
+                        <mat-icon matSuffix>mail </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="email && email.invalid && email.touched"
+                        >
+                          Email is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Contact </mat-label>
+                        <input matInput formControlName="contactNo" />
+                        <mat-icon matSuffix>call </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="
+                            contactNo && contactNo.invalid && contactNo.touched
+                          "
+                        >
+                          Contact Number is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="header ps-0 pt-0">
+                  <h2>Address Details</h2>
+                </div>
+                <div formGroupName="address">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Address 1 </mat-label>
+                        <input matInput formControlName="address1" required />
+                        <mat-icon matSuffix>location_city </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="address1 && address1.invalid && address1.touched"
+                        >
+                          Address is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Address 2 </mat-label>
+                        <input matInput formControlName="address2" />
+                        <mat-icon matSuffix>domain </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="address2 && address2.invalid && address2.touched"
+                        >
+                          Address 2 is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Country </mat-label>
+                        <input matInput formControlName="country" />
+                        <mat-icon matSuffix>flag </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="country && country.invalid && country.touched"
+                        >
+                          Country is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>State </mat-label>
+                        <input matInput formControlName="state" required />
+                        <mat-icon matSuffix>domain </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="state && state.invalid && state.touched"
+                        >
+                          State is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>City </mat-label>
+                        <input matInput formControlName="city" />
+                        <mat-icon matSuffix>location_city </mat-icon>
+                        <!-- <mat-error *ngIf="city && city.invalid && city.touched">
+                          City is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Zip Code </mat-label>
+                        <input matInput formControlName="zipCode" />
+                        <mat-icon matSuffix>place </mat-icon>
+                        <!-- <mat-error
+                          *ngIf="zipCode && zipCode.invalid && zipCode.touched"
+                        >
+                          Zip Code is required
+                        </mat-error> -->
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      &nbsp;
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                      &nbsp;
+                    </div>
+  
+                    <div
+                      class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2 text-end"
+                    >
+                      <button
+                        class="btn-space"
+                        mat-raised-button
+                        color="primary"
+                        type="submit"
+                      >
+                        Update
+                      </button>
+                      <button
+                        type="button"
+                        mat-raised-button
+                        color="primary"
+                      >
+                        Cancle
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

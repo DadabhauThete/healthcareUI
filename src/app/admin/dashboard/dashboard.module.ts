@@ -28,6 +28,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import {MatDialogModule} from '@angular/material/dialog';
 import { Deletemodel } from "./addinsurancebenefit/deleteModel/deletemodel.component";
+import { EditmembersummaryComponent } from './editmembersummary/editmembersummary.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { Deletemodel } from "./addinsurancebenefit/deleteModel/deletemodel.compo
     AddinsurancebenefitComponent,
     ViewinsurancebenefitComponent,
     MembersummaryComponent,
-    Deletemodel
+    Deletemodel,
+    EditmembersummaryComponent
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ import { RegistermemberComponent } from "./registermember/registermember.compone
 import { AddinsurancebenefitComponent } from "./addinsurancebenefit/addinsurancebenefit.component";
 import { ViewinsurancebenefitComponent } from "./viewinsurancebenefit/viewinsurancebenefit.component";
 import { MembersummaryComponent } from "./membersummary/membersummary.component";
+import { EditmembersummaryComponent} from "./editmembersummary/editmembersummary.component";
 const routes: Routes = [
   {
     path: "",
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: "patient-dashboard",
     component: patientDashboard,
+  },
+  {
+    path: "editmembersummary/:id",
+    component: EditmembersummaryComponent,
   },
   { path: "**", component: Page404Component },
 ];

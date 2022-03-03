@@ -191,6 +191,17 @@
                       <a
                         class="btn-style"
                         [routerLink]="[
+                          '/admin/dashboard/editmembersummary',
+                          member.patientID
+                        ]"
+                        ><app-feather-icons
+                          [icon]="'edit'"
+                          [class]="'tbl-fav-edit'"
+                        ></app-feather-icons
+                      ></a>
+                      <a
+                        class="btn-style"
+                        [routerLink]="[
                           '/admin/dashboard/membersummary',
                           member.patientID
                         ]"
