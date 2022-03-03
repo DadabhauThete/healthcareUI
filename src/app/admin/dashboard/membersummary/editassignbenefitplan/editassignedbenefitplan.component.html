@@ -1,0 +1,21 @@
+<h2>Edit Plan</h2>
+<p>Are you sure, you want edit plan?</p>
+<!-- <b>Value From Page</b>:{{ fromPage }} -->
+<div class="btn-sec">
+  <button
+    class="btn-space"
+    mat-raised-button
+    color="warn"
+    [mat-dialog-close]="true"
+  >
+    Edit
+  </button>
+  <button
+    type="button"
+    mat-button
+    [mat-dialog-close]="false"
+    (click)="closeDialog()"
+  >
+    Cancel
+  </button>
+</div>
