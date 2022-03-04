@@ -177,17 +177,17 @@ export class RegistermemberComponent implements OnInit {
         (result) => {
           // Handle result
           console.log(result, "Member Register Succusfully");
+          //Reset Form
+          formDirective.resetForm();
+          this.registerMember.reset();
+          //Reset Form end
+          this.showNotification(colorName, text, placementFrom, placementAlign);
         },
         (error) => {
           this.errors = error;
         }
       );
       this.removeClass = true;
-      //Reset Form
-      formDirective.resetForm();
-      this.registerMember.reset();
-      //Reset Form end
-      this.showNotification(colorName, text, placementFrom, placementAlign);
     }
   }
   onReset() {

@@ -318,7 +318,12 @@
                     >
                       Update
                     </button>
-                    <button type="button" mat-raised-button color="primary">
+                    <button
+                      type="button"
+                      (click)="onRedirect()"
+                      mat-raised-button
+                      color="primary"
+                    >
                       Cancel
                     </button>
                   </div>

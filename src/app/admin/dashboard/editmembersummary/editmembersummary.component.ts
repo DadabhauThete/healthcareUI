@@ -99,12 +99,7 @@ export class EditmembersummaryComponent implements OnInit {
         zipCode: ["", [Validators.required]],
       }),
     });
-    // this.memberSummary
-    //   .getMembersListById(this.id)
-    //   .subscribe((data: MemberData) => {
-    //     console.log(data, "Data from API");
-    //     this.editmembersummary.setValue(data);
-    //   });
+    // Set Data to form
     if (this.id) {
       console.log(this.editmembersummary.value, "Come API FIRST top");
       this.memberSummary
@@ -112,7 +107,7 @@ export class EditmembersummaryComponent implements OnInit {
         .pipe(first())
         .subscribe((x) => {
           this.editmembersummary.patchValue(x);
-          console.log(x, "X value");
+          //console.log(x, "X value");
         });
 
       console.log(this.editmembersummary.value, "Come From API FIRST");
@@ -189,7 +184,10 @@ export class EditmembersummaryComponent implements OnInit {
     this.isAgeAvailable = true;
     return this.ageYear;
   }
-
+  onRedirect() {
+    // redirect
+    this.router.navigate(["/admin/dashboard/searchmember"]);
+  }
   onRegister(formData: any, formDirective: FormGroupDirective) {
     let colorName = "snackbar-success";
     let text = "Member Details Updated Successfully!!!";
