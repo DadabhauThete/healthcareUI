@@ -59,6 +59,7 @@ export class EditmembersummaryComponent implements OnInit {
 
     this.editmembersummary = this.fb.group({
       personal: this.fb.group({
+        patientID: [""],
         firstName: [
           "",
           [
@@ -105,12 +106,21 @@ export class EditmembersummaryComponent implements OnInit {
     //     this.editmembersummary.setValue(data);
     //   });
     if (this.id) {
+      console.log(this.editmembersummary.value, "Come API FIRST top");
       this.memberSummary
         .getMembersListById(this.id)
         .pipe(first())
-        .subscribe((x) => this.editmembersummary.patchValue(x));
+        .subscribe((x) => {
+          this.editmembersummary.patchValue(x);
+          console.log(x, "X value");
+        });
+
+      console.log(this.editmembersummary.value, "Come From API FIRST");
     }
     this.getAge();
+  }
+  get patientID() {
+    return this.editmembersummary.get(["personal", "patientID"]);
   }
   get firstName() {
     return this.editmembersummary.get(["personal", "firstName"]);
@@ -182,9 +192,10 @@ export class EditmembersummaryComponent implements OnInit {
 
   onRegister(formData: any, formDirective: FormGroupDirective) {
     let colorName = "snackbar-success";
-    let text = "Member Register Successfully!!!";
+    let text = "Member Details Updated Successfully!!!";
     let placementFrom = "top";
     let placementAlign = "center";
+
     if (this.editmembersummary.value) {
       console.log("Form Value", this.editmembersummary.value, this.id);
 
@@ -192,19 +203,29 @@ export class EditmembersummaryComponent implements OnInit {
         .updateMemberDetailsId(this.editmembersummary.value)
         .subscribe(
           (result) => {
-            // Handle result
-            console.log(result, "Details Updated Succusfully");
+            console.log(result);
+            //this.editmembersummary.value = data;
+            this.showNotification(
+              colorName,
+              text,
+              placementFrom,
+              placementAlign
+            );
+            console.log(this.showNotification);
+            //Reset Form
+            formDirective.resetForm();
+            this.editmembersummary.reset();
+            //Reset Form end
+            setTimeout(() => {
+              // redirect
+              this.router.navigate(["/admin/dashboard/searchmember"]);
+            }, 3000);
           },
           (error) => {
             this.errors = error;
           }
         );
       this.removeClass = true;
-      //Reset Form
-      formDirective.resetForm();
-      this.editmembersummary.reset();
-      //Reset Form end
-      this.showNotification(colorName, text, placementFrom, placementAlign);
     }
   }
 }

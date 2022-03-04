@@ -33,6 +33,7 @@
                         removeClass == true ? 'removeBorder' : 'sameBorder'
                       "
                     >
+                      <input matInput formControlName="patientID" hidden />
                       <mat-label>First name </mat-label>
                       <input matInput formControlName="firstName" required />
                       <mat-icon matSuffix>face </mat-icon>
@@ -318,7 +319,7 @@
                       Update
                     </button>
                     <button type="button" mat-raised-button color="primary">
-                      Cancle
+                      Cancel
                     </button>
                   </div>
                 </div>
